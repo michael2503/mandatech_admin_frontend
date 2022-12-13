@@ -1,0 +1,41 @@
+@import "../../../../../themes/colors.scss";
+footer {
+    background: #edf1f4;
+    padding: 15px 0px;
+    padding-top: 0px;
+}
+
+dl,
+ol,
+ul {
+    margin-bottom: 0px;
+}
+
+footer .footer-link a,
+.developer,
+.developer a {
+    color: #666 !important;
+    font-size: 15px;
+}
+
+footer .footer-link li {
+    margin-left: 15px;
+}
+
+footer .footer-link a:hover,
+.developer a:hover {
+    color: #000 !important;
+}
+
+.designed {
+    font-size: 14px;
+    color: #999;
+}
+
+.designed a {
+    color: #999 !important;
+}
+
+.designed a:hover {
+    color: $primary !important;
+}

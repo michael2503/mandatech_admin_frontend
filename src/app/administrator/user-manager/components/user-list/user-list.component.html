@@ -1,0 +1,179 @@
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<header class="admin-header">
+    <app-admin-header></app-admin-header>
+</header>
+
+<nav id="drawer">
+    <app-admin-nav-content [mainpage]="'usermanager'" [page]="'users'"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+    <div class="container-fluid">
+
+
+        <div class="page-title-box mb-4">
+          <div class="d-flex justify-content-between">
+            <h4 class="page-title">{{ status }} Users</h4>
+
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item">
+                      <a routerLink="/">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item active">Users</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+
+        <section class="user-list">
+          <div class="row">
+              <div class="col-xl-12">
+                  <div class="card card-dark">
+                      <div class="card-header">
+                          <div class="row">
+                              <div class="col-lg-6 col-md-6 text-white">
+                                <div class="view-page">
+                                  <span class="text-white mr-3">Pages:</span> <select class="selectNum" (change)="selectPerPage($event)">
+                                      <option value="10">10</option>
+                                      <option value="20">20</option>
+                                      <option value="50">50</option>
+                                      <option value="100">100</option>
+                                      <option value="150">150</option>
+                                      <option value="200">200</option>
+                                  </select>
+                                </div>
+                              </div>
+                              <div class="col-lg-6 col-md-6">
+                                  <div class="text-right">
+                                    <form [formGroup]="form" (ngSubmit)="submit()">
+                                      <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Search by email or first name or last name" formControlName="keywords">
+                                        <div class="input-group-append">
+                                          <button class="btn btn-success" *ngIf="!isSearching" type="submit">Go</button>
+                                          <button class="btn btn-danger" *ngIf="!isSearching" (click)="cancelSearch()" type="button"><i class="fa fa-times"></i></button>
+                                          <button class="btn btn-success disabled" *ngIf="isSearching" type="button" disabled><i class="fa fa-spinner fa-spin"></i></button>
+                                        </div>
+                                      </div>
+                                    </form>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+
+                  </div>
+              </div>
+          </div>
+
+          <div class="sortWrap mb-4">
+            <div class="d-flex justify-content-between mobileView">
+                <div class="pointer tabLink" [class.activeTab]="status == 'all'"><a  routerLink="/user-manager/all">All Users</a></div>
+                <div class="pointer tabLink" [class.activeTab]="status == 'active'"><a routerLink="/user-manager/active">Active</a></div>
+                <div class="pointer tabLink" [class.activeTab]="status == 'blocked'"><a routerLink="/user-manager/blocked">Blocked</a></div>
+                <div class="pointer tabLink" [class.activeTab]="status == 'suspended'"><a routerLink="/user-manager/suspended">Suspended</a></div>
+            </div>
+          </div>
+
+
+          <div class="card card-body p-2">
+            <div class="table-responsive">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th>Created</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="users?.length > 0">
+                        <tr *ngFor="let user of users">
+                          <td>{{ user?.first_name | titlecase }}</td>
+                          <td>{{ user?.last_name | titlecase }}</td>
+                          <td>{{ user?.email }}</td>
+                          <td>
+                            <span *ngIf="user?.status == 'Active'" class="badge badge-success">Active</span>
+                            <span *ngIf="user?.status == 'Suspended'" class="badge badge-dark">Suspended</span>
+                            <span *ngIf="user?.status == 'Blocked'" class="badge badge-danger">Blocked</span>
+                          </td>
+
+                          <td>{{user.created_at | date}}</td>
+
+                          <td>
+                            <a class="btn btn-success btn-sm mr-3" routerLink="/user-manager/info/{{ user?.id }}"><i class="fa fa-eye"></i></a>
+                            <button *ngIf="!isDeleting" (click)="deleteBanner('warning', user?.id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                            <button *ngIf="isDeleting" disabled class="btn btn-danger btn-sm"><i class="fa fa-spinner fa-spin"></i></button>
+                          </td>
+                        </tr>
+                    </tbody>
+
+                    <tbody *ngIf="users?.length < 1">
+                      <tr>
+                        <td colspan="6" class="text-center">No User</td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="panel-footer mt-2">
+              <div class="row">
+                  <div class="col-sm-6 col-xs-6">showing
+                      <b>{{ users?.length }}</b>
+                      out of
+                      <b>{{ userCount }}</b>
+                      entries
+                  </div>
+                  <div class="col-sm-6 col-xs-6">
+                      <ul class="pagination hidden-xs pull-right">
+                          <button *ngIf="userCount > 0 && !isLoadMore" (click)="loadMore()" [disabled]="userCount <= users.length" class="btn btn-success btn-sm">Load more</button>
+
+                          <button *ngIf="isLoadMore" disabled class="btn btn-success">Loading <i class="fa fa-spinner fa-spin"></i></button>
+                      </ul>
+                  </div>
+              </div>
+            </div>
+        </div>
+
+
+        </section>
+
+
+
+
+    </div>
+  </div>
+</div>
+<app-admin-footer></app-admin-footer>
+
+
+
+
+<div *ngIf="showNotice">
+  <div class="adminNoteWrap">
+    <div *ngIf="justMssg">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+      </svg>
+
+      <p class="pt-3"> {{theMessage}} </p>
+      <div class="d-flex justify-content-center"><button class="btn btn-sm btn-primary" (click)="closeMyNotice()">Close</button></div>
+    </div>
+
+    <div *ngIf="deleteModal">
+      <div class="d-flex justify-content-center"><i class="fa fa-times delIcon"></i></div>
+      <p class="text-center">{{theMessage}}</p>
+      <div class="text-center mt-4 mb-2">
+          <button *ngIf="!isDeleting" class="btn btn-success btn-sm mr-5" (click)="deleteBanner('', returnID)">YES</button>
+          <button *ngIf="isDeleting" class="btn btn-success btn-sm mr-5"><i class="fa fa-spinner fa-spin"></i></button>
+          <button class="btn btn-primary btn-sm" (click)="closeMyNotice()">NO</button>
+      </div>
+    </div>
+  </div>
+</div>

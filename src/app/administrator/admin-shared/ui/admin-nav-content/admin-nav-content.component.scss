@@ -1,0 +1,46 @@
+@import '../../../../../themes/colors.scss';
+
+.adminInfo{
+    height: 90px;
+    border-bottom: 1px solid $secondary;
+    border-right: 1px solid $secondary;
+    width: 260px;
+    // position: fixed;
+    z-index: 1;
+    background: $secondary;
+    // top: 70px;
+
+    .justify-content-start{
+        padding: 17px 10px 10px 10px;
+    }
+    img{
+        width: 55px;
+        height: 55px;
+        border-radius: 5px;
+    }
+    .names{
+        color: #fff;
+        h3{
+            font-size: 16px;
+            margin-bottom: 2px;
+        }
+        p{
+            font-size: 13px;
+            margin-bottom: 0px;
+            color: #6D6D80 !important;
+            font-weight: 550;
+        }
+        .online{
+            font-size: 11px;
+            color: #0BB783 !important;
+        }
+    }
+}
+
+#menu-wrapper .navList{
+    overflow-y: auto !important;
+    height: calc(100vh - 170px);
+}
+// .isActive{
+//     background-color: red;
+// }

@@ -1,0 +1,17 @@
+::ng-deep .angular-editor {
+  background: #fff;
+}
+
+::ng-deep .angular-editor-textarea {
+  height: auto !important;
+  min-height: 180px !important;
+}
+
+.bannerErr{
+  border: 1px dashed #721c24;
+  background: #f8d7da;
+  padding: 10px;
+  font-size: 14px;
+  color: #721c24;
+  margin-bottom: 20px;
+}

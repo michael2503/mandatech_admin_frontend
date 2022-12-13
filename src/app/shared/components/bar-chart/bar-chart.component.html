@@ -1,0 +1,63 @@
+<div #barChartPar class="barChartPar">
+    <div class="numIndCont">
+        <div *ngFor="let num of numArr" class="eachNum"><span>{{num}}</span></div>
+        <!-- <div class="eachNum"><span>80</span></div>
+        <div class="eachNum"><span>60</span></div>
+        <div class="eachNum"><span>40</span></div>
+        <div class="eachNum"><span>20</span></div>
+        <div class="eachNum"><span>0</span></div> -->
+    </div>
+    <div class="eachStackCont">
+        <div class="eachStack"></div>
+        <div class="eachStack"></div>
+        <div class="eachStack"></div>
+        <div class="eachStack"></div>
+        <div class="eachStack"></div>
+        <div class="barsCont">
+            <div *ngFor="let each of groupedArr" class="eachStackItem">
+                <div *ngFor="let d of each.data" (mouseover)="setTooltip($event)" class="eachSingle">
+                    <div [class.right]="tipRight" class="cusTooltip">
+                        <div class="innertip">
+                            <h4>{{d}} Products</h4>
+                            <span>{{each.date | date}}</span>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="eachSingle"></div> -->
+            </div>
+            <!-- <div class="eachStackItem">
+                <div class="eachSingle"></div>
+                <div class="eachSingle"></div>
+            </div>
+            <div class="eachStackItem">
+                <div class="eachSingle"></div>
+                <div class="eachSingle"></div>
+            </div>
+            <div class="eachStackItem">
+                <div class="eachSingle"></div>
+                <div class="eachSingle"></div>
+            </div>
+            <div class="eachStackItem">
+                <div class="eachSingle"></div>
+                <div class="eachSingle"></div>
+            </div>
+            <div class="eachStackItem">
+                <div class="eachSingle"></div>
+                <div class="eachSingle"></div>
+            </div>
+            <div class="eachStackItem">
+                <div class="eachSingle"></div>
+                <div class="eachSingle"></div>
+            </div> -->
+        </div>
+        <div class="durationCont">
+            <div *ngFor="let dur of duration" class="eachDuration"><span>{{dur}}</span></div>
+            <!-- <div class="eachDuration"><span>Sunday</span></div>
+            <div class="eachDuration"><span>Sunday</span></div>
+            <div class="eachDuration"><span>Sunday</span></div>
+            <div class="eachDuration"><span>Sunday</span></div>
+            <div class="eachDuration"><span>Sunday</span></div>
+            <div class="eachDuration"><span>Sunday</span></div> -->
+        </div>
+    </div>
+</div>

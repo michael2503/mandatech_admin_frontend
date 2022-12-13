@@ -1,0 +1,254 @@
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<header class="admin-header">
+    <app-admin-header></app-admin-header>
+</header>
+
+<nav id="drawer">
+    <app-admin-nav-content [mainpage]="'productmanager'" page="addproduct"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+    <div class="container-fluid">
+
+
+
+      <div class="page-title-box">
+        <div class="d-flex justify-content-between">
+          <h4 class="page-title">Edit Product</h4>
+
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item">
+                    <a routerLink="/">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a routerLink="/products">Products</a>
+                </li>
+                <li class="breadcrumb-item active">Edit Product</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+
+
+      <section class="web-set">
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <div class="row">
+            <div class="col-xl-5 mt-5">
+              <div class="card card-dark">
+                <div class="card-header text-white">
+                  General Info
+                </div>
+
+                <div class="card-body">
+                  <div class="form-group">
+                    <label for="name">Product Name</label>
+                    <input type="text" class="form-control" formControlName="name">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="name">Select Category</label>
+                    <select class="form-control custom-select" formControlName="category">
+                      <option labal="--- Select Category ---" hidden></option>
+                      <option *ngFor="let cat of categories" value="{{ cat?.slug }}">{{ cat?.category }}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="name">Old Price</label>
+                    <input type="text" class="form-control" formControlName="old_price">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="name">Sales Price</label>
+                    <input type="text" class="form-control" formControlName="sales_price">
+                  </div>
+
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-7 mt-5">
+              <div class="card card-dark">
+                <div class="card-header text-white">
+                  Specifications
+                </div>
+
+                <div class="card-body" style="height: 480px; overflow-y: auto;">
+                  <div formArrayName="moreFaqs">
+                    <div class="each-varaition" *ngFor="let variant of moreFaqFormGroup.controls; let i = index;">
+
+                      <div class="addmore mb-2" [formGroupName]="i">
+                        <div class="row">
+                          <div class="col-xl-5">
+                              <div class="form-group">
+                                  <label>Name</label>
+                                  <input type="text" class="form-control" id="name" name="name" placeholder="Size" formControlName="name">
+                              </div>
+                          </div>
+                          <div class="col-xl-7">
+                              <div class="form-group">
+                                  <label>Value</label>
+                                  <!-- <input type="text" placeholder="Enter bonus in percentage" class="form-control" id="bonus" name="bonus" formControlName="bonus"> -->
+                                  <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="value" name="value" formControlName="value" placeholder="Extra large">
+                                    <div class="input-group-append">
+                                      <button class="btn btn-danger" (click)="removeFaq(i)" type="button"><i class="fa fa-trash"></i></button>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button *ngIf="moreFaqFormGroup.controls.length < 10" class="btn btn-light btn-sm" type="button" (click)="addFaq()">Add More</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card card-dark mt-4">
+            <div class="card-header text-white">More Info</div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-xl-6">
+                  <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" class="form-control" formControlName="quantity">
+                    <div *ngIf="n('quantity')?.touched && n('quantity')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="name">SKU</label>
+                    <div class="input-group mb-3">
+                      <input type="text" readonly class="form-control" placeholder="Generate sku" formControlName="sku">
+                      <div class="input-group-append" (click)="generateSKU()">
+                        <button class="btn btn-success" type="button">Generate</button>
+                      </div>
+                    </div>
+                    <div *ngIf="n('sku')?.touched && n('sku')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+
+                </div>
+
+                <div class="col-xl-6">
+                  <div class="form-group">
+                    <label for="">Overview</label>
+                    <textarea formControlName="overview" class="form-control" rows="6"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="card card-dark mt-4">
+            <div class="card-header text-white">Product Image</div>
+            <div class="card-body">
+              <div class="row">
+                <div *ngIf="itemImages?.length < 9" class="col-lg-4 col-md-6 col-sm-12">
+                    <label for="fileload" class="label-upload">
+                        <div *ngIf="fileUploadError" class="alert alert-danger"
+                            style="padding: 3px;text-align: center;"> {{fileUploadError}}</div>
+
+                        <div *ngIf="uploadingProgress > 0" class="progress">
+                            <span class="progress-bar progress-bar-striped progress-bar-animated"
+                                role="progressbar" aria-valuenow="100" aria-valuemin="0"
+                                aria-valuemax="100" style="width: 100%">
+                                Uploading...{{ uploadingProgress }}%
+                            </span>
+                        </div>
+                        <input type="file" id="fileload" accept="image/*"
+                            (change)="onSelectedFile($event)">
+
+                        <div class="label-content">
+                            <i class="fa fa-picture-o"></i>
+                            <p>Click here to <br> Browse</p>
+                            <b *ngIf="selectedFileName">
+                                {{selectedFileName | summary: 50}}
+                            </b>
+                        </div>
+                    </label>
+                </div>
+
+                <div *ngFor="let img of itemImages; let i = index" class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="uploaded-img-wrapper">
+                        <div class="overlay">
+                            <div class="d-flex justify-content-between">
+                              <div class="mr-2">
+                                <span *ngIf="img?.original_url !== featuredIMG" (click)="setPrimary(i)" class="action badge badge-primary"> Set to Primary</span>
+
+                                <span *ngIf="img?.original_url === featuredIMG" class="action badge badge-success">* Primary
+                                </span>
+                              </div>
+
+                              <div class="ml-2">
+                                <span *ngIf="img?.original_url !== featuredIMG" (click)="remove(i)" class="remove badge badge-danger">Remove</span>
+                              </div>
+
+                            </div>
+                        </div>
+                        <img [src]="img?.original_url" class="uploaded-img">
+                    </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card card-dark mt-4">
+            <div class="card-header text-white">Descriptions</div>
+            <div class="card-body">
+              <angular-editor id="editor1" [placeholder]="'Enter text here...'" formControlName="description" [config]="editorConfig"></angular-editor>
+            </div>
+          </div>
+
+          <div class="text-center mt-5">
+            <button *ngIf="!isSubmitting" class="btn btn-primary">UPDATE PRODUCT</button>
+            <button *ngIf="isSubmitting" class="btn btn-primary"><i class="fa fa-spin fa-spinner"></i> UPDATING..</button>
+          </div>
+
+        </form>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+
+<app-admin-footer></app-admin-footer>
+
+
+
+<div *ngIf="showNotice">
+  <div class="adminNoteWrap">
+    <div *ngIf="justMssg">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+      </svg>
+
+      <p class="pt-3"> {{theMessage}} </p>
+      <div class="d-flex justify-content-center"><button class="btn btn-sm btn-primary" (click)="closeMyNotice()">Close</button></div>
+    </div>
+
+    <!-- <div *ngIf="deleteModal">
+      <div class="d-flex justify-content-center"><i class="fa fa-times delIcon"></i></div>
+      <p class="text-center">{{theMessage}}</p>
+      <div class="text-center mt-4 mb-2">
+          <button class="btn btn-success btn-sm mr-5" (click)="deleteBanner('', returnID)">YES</button>
+          <button class="btn btn-primary btn-sm" (click)="closeMyNotice()">NO</button>
+      </div>
+    </div> -->
+  </div>
+</div>

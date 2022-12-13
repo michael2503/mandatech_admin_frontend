@@ -1,0 +1,150 @@
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<header class="admin-header">
+    <app-admin-header></app-admin-header>
+</header>
+
+<nav id="drawer">
+    <app-admin-nav-content [mainpage]="'generalsettings'" page="'socailsettings'"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+    <div class="container-fluid">
+
+        <div class="page-title-box">
+          <div class="d-flex justify-content-between">
+            <h4 class="page-title">Social Settings</h4>
+
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item">
+                      <a routerLink="/">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item">
+                      <a routerLink="/settings-manager">Settings Manager</a>
+                  </li>
+                  <li class="breadcrumb-item active">Social Settings</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <section class="web-set mt-5">
+
+            <div class="row">
+                <div class="col-xl-6">
+                    <form [formGroup]="form" (ngSubmit)="submit()">
+                        <div class="card card-dark">
+                            <div class="card-header text-white">
+                                Social Page Links
+                            </div>
+                            <div class="card-body">
+
+                                <div class="form-group mb-4">
+                                    <label for="name">Name <span class="text-danger">*</span></label>
+                                    <input type="text" formControlName="name" id="name" class="form-control mb-1">
+                                    <div *ngIf="name.touched && !name.valid" class="errorMessage alert alert-danger">Social media name is required</div>
+                                </div>
+
+                                <div class="form-group mb-4">
+                                    <label for="link">Link <span class="text-danger">*</span></label>
+                                    <input type="text" formControlName="link" id="link" class="form-control mb-1" placeholder="https://socialmedia.com/xyz">
+                                    <div *ngIf="link.touched && !link.valid" class="errorMessage alert alert-danger">Social media link is required</div>
+                                </div>
+
+                                <div class="form-group mb-4">
+                                    <label for="icon">Icon <span class="text-danger">*</span></label>
+                                    <input type="text" formControlName="icon" id="icon" class="form-control mb-1" placeholder="eg fa-facebook">
+                                    <div *ngIf="icon.touched && !icon.valid" class="errorMessage alert alert-danger">Social media icon is required</div>
+                                </div>
+
+                                <div class="mt-5 text-center mb-3">
+                                    <button *ngIf="!isLoading" class="send btn btn-primary" [disabled]="!form.valid">SUBMIT</button>
+                                    <button *ngIf="isLoading" class="send btn btn-primary" disabled><i class="fa fa-spinner fa-spin"></i> Submitting</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="col-xl-6">
+                    <div class="card mb-3 card-dark">
+                        <div class="card-header text-white">
+                            All Social Links
+                        </div>
+
+                        <div class="card-body">
+                            <div class="each-link" *ngFor="let social of allSocail">
+                                <div class="d-flex justify-content-between">
+                                    <div class="url-title">{{social?.name}}</div>
+                                    <div>
+                                        <button type="button" class="btn btn-danger btn-sm float-right" (click)="deleteSocail('warning', social?.id)"><i class="fa fa-trash"></i></button>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <div class="input-title">Link:</div>
+                                    <div class="form-input"><input type="text" value="{{social?.link}}" class="form-control mb-1" readonly></div>
+                                </div>
+
+                                <div class="d-flex justify-content-between">
+                                    <div class="input-title">Icon: </div>
+                                    <div class="form-input"><input type="text" value="{{social?.icon}}" class="form-control mb-1" readonly></div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+  </div>
+</div>
+
+<app-admin-footer></app-admin-footer>
+
+<!-- <div *ngIf="showNotice">
+    <div class="adminNoteWrap">
+        <p *ngIf="justMssg">
+            {{theMessage}}
+            <span class="float-right pointer" (click)="closeMyNotice()"><i class="fa fa-times"></i></span>
+        </p>
+
+        <div *ngIf="deleteModal">
+            <p class="text-center">Are you sure you want to DELETE this link?</p>
+            <div class="text-center mt-4 mb-2">
+                <button class="btn btn-success btn-sm mr-5" (click)="deleteSocail()">YES</button>
+                <button class="btn btn-primary btn-sm" (click)="closeMyNotice()">NO</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+-->
+
+<div *ngIf="showNotice">
+  <div class="adminNoteWrap">
+    <div *ngIf="justMssg">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+      </svg>
+
+      <p class="pt-3"> {{theMessage}} </p>
+      <div class="d-flex justify-content-center"><button class="btn btn-sm btn-primary" (click)="closeMyNotice()">Close</button></div>
+    </div>
+
+    <div *ngIf="deleteModal">
+      <div class="d-flex justify-content-center"><i class="fa fa-times delIcon"></i></div>
+      <p class="text-center">{{theMessage}}</p>
+      <div class="text-center mt-4 mb-2">
+          <button class="btn btn-success btn-sm mr-5" (click)="deleteSocail('', returnID)">YES</button>
+          <button class="btn btn-primary btn-sm" (click)="closeMyNotice()">NO</button>
+      </div>
+    </div>
+  </div>
+</div>

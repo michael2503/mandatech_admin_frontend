@@ -1,0 +1,308 @@
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<header class="admin-header">
+    <app-admin-header></app-admin-header>
+</header>
+
+<nav id="drawer">
+    <app-admin-nav-content [mainpage]="'contentmanager'" page="'homebanner'"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+    <div class="container-fluid">
+
+
+
+      <div class="page-title-box">
+        <div class="d-flex justify-content-between">
+          <h4 class="page-title">Home Banner</h4>
+
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item">
+                    <a routerLink="/">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Home Banners</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+
+
+      <section class="web-set">
+
+        <div class="row d-flex justify-content-center">
+
+          <!-- <div class="col-xl-6 mt-5">
+            <form [formGroup]="form" (ngSubmit)="submit()">
+              <div class="card card-dark">
+                <div class="card-header text-white">
+                  General
+                </div>
+
+                <div class="card-body">
+                  <div class="form-group mb-3">
+                    <label for="title">Title <span class="text-danger">*</span></label>
+                    <input type="text" formControlName="title" id="title" class="form-control mb-0">
+                    <div *ngIf="n('title')?.touched && n('title')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label for="btn_title">Button Title <span class="text-danger">*</span></label>
+                    <input type="text" formControlName="btn_title" id="btn_title" class="form-control mb-0">
+                    <div *ngIf="n('btn_title')?.touched && n('btn_title')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label for="btn_link">Button Link <span class="text-danger">*</span></label>
+                    <input type="url" formControlName="btn_link" id="btn_link" class="form-control mb-0">
+                    <div *ngIf="n('btn_link')?.touched && n('btn_link')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+
+                  <div *ngIf="bannerUploadErr" class="bannerErr">
+                    <p>Min image size is: 1600px By 750px</p>
+                    <p class="mb-0">Max image size is: 2200px By 1031px</p>
+                  </div>
+                  <div class="form-group">
+                    <label>Upload Banner</label>
+                    <div class="adminUpload">
+
+                      <div class="uploadWrapper text-center" style="position: relative;">
+                          <div *ngIf="uploadedBanners" class="deleteImg" (click)="removeUploadBanner()">
+                              <i class="fa fa-trash"></i>
+                          </div>
+                          <label *ngIf="removeLabelBanner" class="uploadLabel" for="faviconUpld">
+                              <i class="fa fa-upload uploadIcon"></i>
+                              <p>Click here to upload file</p>
+                          </label>
+
+                          <input hidden formControlName="banner">
+                          <input type="file" hidden id="faviconUpld" class="form-control mb-0" (change)="onloadFile($event, 'mainForm')">
+
+                          <div *ngIf="uploadingProgress > 0" class="progress uploadProgress">
+                              <span class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                              Uploading...{{ uploadingProgress }}%
+                              </span>
+                          </div>
+
+                          <img *ngIf="uploadedBanners" src="{{uploadedBanners}}" class="uploaded">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label for="content">Contents <span class="text-danger">*</span></label>
+                    <textarea formControlName="content" class="form-control mb-0" rows="5"></textarea>
+                    <div *ngIf="n('content')?.touched && n('content')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+
+                  <div class="mt-4 text-center">
+                    <button *ngIf="!isSubmitting" class="btn btn-primary" [disabled]="!form.valid">Add Banner</button>
+                    <button *ngIf="isSubmitting" class="btn btn-primary disabled"><i class="fa fa-spin fa-spinner"></i> Adding Banner...</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div> -->
+
+
+          <div class="col-xl-6 mt-5">
+            <div class="card card-dark">
+              <div class="card-header text-white">All Banners</div>
+              <div class="card-body p-3">
+                <div *ngFor="let banner of banners" class="each-banner">
+                  <ng-container *ngIf="banner?.id == 2">
+                    <img src="{{ banner?.banner }}" alt="{{ banner?.title }}" class="bannerImg">
+
+                    <p class="mt-2 mb-2">{{ banner?.title }}</p>
+                    <p>{{ banner?.content }}</p>
+                    <div>
+                      <button class="btn btn-primary btn-sm mr-3" [openModal]="openDetailModal" (click)="getEachBanner(banner?.id)"><i class="fa fa-pencil"></i></button>
+                      <!-- <button class="btn btn-danger btn-sm" (click)="deleteBanner('warning', banner?.id)"><i class="fa fa-trash"></i></button> -->
+                    </div>
+                  </ng-container>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+
+      </section>
+
+
+
+    </div>
+  </div>
+</div>
+
+<app-admin-footer></app-admin-footer>
+
+
+
+
+
+<div id="modals">
+
+  <app-modal #openDetailModal [closeModal]="closeModal">
+      <div class="modalContent" style="background: #fff !important;">
+          <div class="modalHead">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h5 class="text-dark">Edit Banner</h5>
+              </div>
+
+              <div>
+                <span class="closeBtn">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                          d="M12.026 0L7 5.026L1.974 0L0 1.974L5.026 7L0 12.026L1.974 14L7 8.974L12.026 14L14 12.026L8.974 7L14 1.974L12.026 0Z"
+                          fill="#fff" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="modalBody" style="overflow-y: auto; height: 500px;">
+            <div class="formBody">
+              <form [formGroup]="formEdit" (ngSubmit)="submitEdit()">
+
+                <div class="form-group mb-3">
+                  <label for="title">Title <span class="text-danger">*</span></label>
+                  <input type="text" formControlName="title" id="title" class="form-control mb-0">
+                  <div *ngIf="fedit('title')?.touched && fedit('title')?.invalid" class="alert alert-danger">*This field is required!
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="sub_title">Sub Title <span class="text-danger">*</span></label>
+                  <input type="text" formControlName="sub_title" id="sub_title" class="form-control mb-0">
+                  <div *ngIf="fedit('sub_title')?.touched && fedit('sub_title')?.invalid" class="alert alert-danger">*This field is required!
+                  </div>
+                </div>
+
+                <!-- <div class="form-group mb-3">
+                  <label for="btn_title">Button Title <span class="text-danger">*</span></label>
+                  <input type="text" formControlName="btn_title" id="btn_title" class="form-control mb-0">
+                  <div *ngIf="fedit('btn_title')?.touched && fedit('btn_title')?.invalid" class="alert alert-danger">*This field is required!
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="btn_link">Button Link <span class="text-danger">*</span></label>
+                  <input type="url" formControlName="btn_link" id="btn_link" class="form-control mb-0">
+                  <div *ngIf="fedit('btn_link')?.touched && fedit('btn_link')?.invalid" class="alert alert-danger">*This field is required!
+                  </div>
+                </div> -->
+
+                <div *ngIf="bannerUploadEditErr" class="bannerErr">
+                  <p>Min image size is: 1600px By 750px</p>
+                  <p class="mb-0">Max image size is: 2200px By 1031px</p>
+                </div>
+                <div class="form-group">
+                  <label>Upload Banner</label>
+                  <div class="adminUpload">
+
+                    <div class="uploadWrapper text-center" style="position: relative;">
+                        <div *ngIf="uploadedBannersEdit" class="deleteImg" (click)="removeUploadBannerEdit()">
+                            <i class="fa fa-trash"></i>
+                        </div>
+                        <label *ngIf="removeLabelBannerEdit" class="uploadLabel" for="faviconUpldEdit">
+                            <i class="fa fa-upload uploadIcon"></i>
+                            <p>Click here to upload file</p>
+                        </label>
+
+                        <input hidden formControlName="banner">
+                        <input type="file" hidden id="faviconUpldEdit" class="form-control mb-0" (change)="onloadFile($event, 'theBanner')">
+
+                        <div *ngIf="uploadingProgress > 0" class="progress uploadProgress">
+                            <span class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            Uploading...{{ uploadingProgress }}%
+                            </span>
+                        </div>
+
+                        <img *ngIf="uploadedBannersEdit" src="{{uploadedBannersEdit}}" class="uploaded">
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="form-group">
+                  <label>Upload Image</label>
+                  <p>Min image size is: 698px By 468px</p>
+                  <div class="adminUpload">
+
+                    <div class="uploadWrapper text-center" style="position: relative;">
+                        <div *ngIf="uploadedImageEdit" class="deleteImg" (click)="removeUploadImageEdit()">
+                            <i class="fa fa-trash"></i>
+                        </div>
+                        <label *ngIf="removeLabelImageEdit" class="uploadLabel" for="imageUpldEdit">
+                            <i class="fa fa-upload uploadIcon"></i>
+                            <p>Click here to upload file</p>
+                        </label>
+
+                        <input hidden formControlName="banner">
+                        <input type="file" hidden id="imageUpldEdit" class="form-control mb-0" (change)="onloadFile($event, 'theImage')">
+
+                        <div *ngIf="uploadingProgress > 0" class="progress uploadProgress">
+                            <span class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            Uploading...{{ uploadingProgress }}%
+                            </span>
+                        </div>
+
+                        <img *ngIf="uploadedImageEdit" src="{{uploadedImageEdit}}" class="uploaded">
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group mb-3">
+                  <label for="content">Contents <span class="text-danger">*</span></label>
+                  <textarea formControlName="content" class="form-control mb-0" rows="5"></textarea>
+                  <div *ngIf="fedit('content')?.touched && fedit('content')?.invalid" class="alert alert-danger">*This field is required!
+                  </div>
+                </div>
+
+                <div class="mt-4 text-center">
+                  <button *ngIf="!isUpdating" class="btn btn-primary" [disabled]="!formEdit.valid">Update Banner</button>
+                  <button *ngIf="isUpdating" class="btn btn-primary disabled"><i class="fa fa-spin fa-spinner"></i> Updating Banner...</button>
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+  </app-modal>
+
+</div>
+
+
+<div *ngIf="showNotice">
+  <div class="adminNoteWrap">
+    <div *ngIf="justMssg">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+      </svg>
+
+      <p class="pt-3"> {{theMessage}} </p>
+      <div class="d-flex justify-content-center"><button class="btn btn-sm btn-primary" (click)="closeMyNotice()">Close</button></div>
+    </div>
+
+    <div *ngIf="deleteModal">
+      <div class="d-flex justify-content-center"><i class="fa fa-times delIcon"></i></div>
+      <p class="text-center">{{theMessage}}</p>
+      <div class="text-center mt-4 mb-2">
+          <button class="btn btn-success btn-sm mr-5" (click)="deleteBanner('', returnID)">YES</button>
+          <button class="btn btn-primary btn-sm" (click)="closeMyNotice()">NO</button>
+      </div>
+    </div>
+  </div>
+</div>

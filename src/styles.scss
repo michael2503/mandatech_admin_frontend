@@ -1,0 +1,107 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '~simple-line-icons/css/simple-line-icons.css';
+@import '~font-awesome/css/font-awesome.min.css';
+@import '~flag-icon-css/css/flag-icons.min.css';
+@import './themes/colors.scss';
+@font-face {
+    font-family: 'DM Sans';
+    src: url(assets/fonts/DMSans-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'DM Sans';
+    src: url(assets/fonts/DMSans-Medium.ttf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'DM Sans';
+    src: url(assets/fonts/DMSans-Bold.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: 'Mulish';
+    src: url(assets/fonts/mulish-cufonfonts/Mulish-Regular.ttf);
+}
+
+@font-face {
+    font-family: 'Mulish';
+    src: url(assets/fonts/mulish-cufonfonts/Mulish-SemiBold.ttf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Mulish';
+    src: url(assets/fonts/mulish-cufonfonts/Mulish-Bold.ttf);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'Mulish';
+    src: url(assets/fonts/mulish-cufonfonts/Mulish-ExtraBold.ttf);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Mulish';
+    src: url(assets/fonts/mulish-cufonfonts/Mulish-Black.ttf);
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url(assets/fonts/inter/Inter-Regular.ttf);
+    // font-weight: 800;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url(assets/fonts/inter/Inter-Medium.ttf);
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url(assets/fonts/inter/Inter-SemiBold.ttf);
+    font-weight: 600;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url(assets/fonts/inter/Inter-Bold.ttf);
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url(assets/fonts/inter/Inter-ExtraBold.ttf);
+    font-weight: 800;
+}
+
+@font-face {
+    font-family: 'Inter';
+    src: url(assets/fonts/inter/Inter-Black.ttf);
+    font-weight: 900;
+}
+
+input,
+textarea,
+select {
+  background: #f9f9f9 !important;
+  color: #000 !important;
+  padding: 10px !important;
+}
+
+
+
+@import './themes/adminstyle.scss';
+
+
+// input,
+// textarea,
+// select {
+//   background: #fff !important;
+//   color: #000 !important;
+//   padding: 10px !important;
+// }

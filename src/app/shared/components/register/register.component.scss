@@ -1,0 +1,12 @@
+@import '../login/login.component.scss';
+.rememberForgot {
+    .remember {
+        input+label {
+            align-items: flex-start;
+            .cusCheck {
+                margin-right: 10px;
+                margin-top: 3px;
+            }
+        }
+    }
+}

@@ -1,0 +1,34 @@
+<div class="d-flex justify-content-between" style="height: 50px">
+
+  <div></div>
+  <div class="admin-dropdown-header">
+      <!-- [class.collapse]="'collapsed'" -->
+      <div class="navbar-collapse" id="navbarContent" style="margin-top: -15px">
+          <ul class="navbar-nav ml-auto">
+              <li class="nav-item" ngbDropdown display="dynamic" placement="bottom-right">
+                  <a class="nav-link" style="cursor: pointer" ngbDropdownToggle id="navbarDropdown3" role="button">
+                      <img *ngIf="adm?.photo" [src]="adm?.photo" class="rounded-circle admin-pro-img" style="max-height: 50px;">
+                      <img *ngIf="!adm?.photo || adm?.photo == ''" src="/assets/images/picture.png" class="rounded-circle admin-pro-img" style="max-height: 50px;">
+
+                      <span class="ml-2 admin_name">
+                          {{adm?.username | titlecase}}
+                          <i class="fa fa-sort-down"></i>
+                      </span>
+                  </a>
+                  <div ngbDropdownMenu aria-labelledby="navbarDropdown3" class="dropdown-menu">
+                      <a ngbDropdownItem routerLink="/{{adminUrl}}/admin-manager/profile">
+                          <i class="fa fa-user"></i> Profile
+                      </a>
+                      <a ngbDropdownItem routerLink="/{{adminUrl}}/admin-manager/change-password">
+                          <i class="fa fa-lock"></i> Change Password
+                      </a>
+                      <a ngbDropdownItem (click)="logout()" style="cursor: pointer;">
+                          <i class="fa fa-sign-out"></i> Logout
+                      </a>
+                  </div>
+              </li>
+          </ul>
+      </div>
+
+  </div>
+</div>

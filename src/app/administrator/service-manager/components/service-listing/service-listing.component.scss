@@ -1,0 +1,108 @@
+.post-slide{
+  border: 1px solid #eee;
+  padding: 7px;
+  margin: 15px 0px;
+  position: relative;
+  background: #fff;
+}
+.post-slide:before{
+  content: "";
+  border-top:1px solid transparent;
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  transition:all 0.3s ease-in-out 0s;
+}
+.post-slide:hover:before{
+  border-top: 1px solid #3398db;
+}
+.post-slide:hover{
+  border-top: 1px solid #3398db;
+}
+.post-slide .post-img > img{
+  width: 100%;
+  height:220px;
+  object-fit: cover;
+}
+.post-slide .post-title > a{
+  font-size: 20px;
+  text-transform: capitalize;
+  color:#333;
+  transition:all 0.3s ease-in-out 0s;
+}
+.post-slide .post-title > a:hover{
+  text-decoration: none;
+  color:#3398db;
+}
+.post-slide .post-bar{
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+}
+.post-slide .post-bar > li{
+  display: inline-block;
+  border-right: 1px solid #999;
+  padding: 0 10px;
+  float: left;
+}
+.post-slide .post-bar > li:first-child{
+  padding: 0 10px 0 0;
+}
+.post-slide .post-bar > li:last-child{
+  border: 0px none;
+}
+.post-slide .post-date,
+.post-slide .author,
+.post-slide .comment{
+  color:#3398db;
+  text-transform: uppercase;
+  font-size: 11px;
+}
+.post-slide .author > a,
+.post-slide .comment > a,
+.post-slide .comment > i{
+  color:#999;
+  transition:all 0.3s ease-in-out 0s;
+}
+.post-slide .author > a:hover,
+.post-slide .comment > a:hover{
+  text-decoration: none;
+  color:#333;
+}
+.post-slide .comment > i{
+  margin-right: 8px;
+  font-size: 15px;
+}
+.post-slide .post-description{
+  line-height: 1.7;
+  color:#666;
+  font-size: 13px;
+  margin-bottom: 20px;
+  height: 40px;
+}
+.post-slide .readmore{
+  display: inline-block;
+  padding: 10px 35px;
+  background: #3398db;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 20px;
+  margin-bottom: 5px;
+  text-transform: uppercase;
+  transition:all 0.3s ease-in-out 0s;
+}
+.post-slide .readmore:hover{
+  text-decoration: none;
+  color:#fff;
+  background: #333;
+}
+@media only screen and (max-width: 360px) {
+  .post-bar > li:last-child{
+      margin-top: 8px;
+      padding: 0;
+  }
+}

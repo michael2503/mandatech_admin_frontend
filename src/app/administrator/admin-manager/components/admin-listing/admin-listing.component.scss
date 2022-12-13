@@ -1,0 +1,24 @@
+.user-list table tr td{
+  padding: 15px 12px 5px 12px;
+  font-size: 14px;
+}
+.user-list table tr td.table-img{
+  padding: 5px 12px !important;
+  img{
+    height: 40px;
+    width: 40px;
+  }
+}
+
+input, textarea, select{
+  background: #fff !important;
+  color: #000 !important;
+  padding: 10px !important;
+}
+thead{
+  border-top: 1px solid #ccc;
+}
+.searchInput{
+  height: 40px;
+  border-radius: 0px;
+}

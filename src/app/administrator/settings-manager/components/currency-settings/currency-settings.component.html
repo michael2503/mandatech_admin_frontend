@@ -1,0 +1,123 @@
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<header class="admin-header">
+    <app-admin-header></app-admin-header>
+</header>
+
+
+<nav id="drawer">
+    <app-admin-nav-content [mainpage]="'generalsettings'" page="'currencysettings'"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+      <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="custmDisplay col-xl-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="page-title-box">
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+                                    <li class="breadcrumb-item">
+                                        <a routerLink="/{{adminUrl}}">Dashboard</a>
+                                    </li>
+                                    <li class="breadcrumb-item">
+                                        <a routerLink="/{{adminUrl}}/settings-manager">Settings Manager</a>
+                                    </li>
+                                    <li class="breadcrumb-item active">
+                                        Currency Setting
+                                    </li>
+                                </ol>
+                            </div>
+                            <h4 class="page-title">Currency Setting</h4>
+                        </div>
+                    </div>
+                </div>
+
+                <section class="web-set">
+                    <div class="row">
+                        <div class="col-xl-6">
+                            <form [formGroup]="form" (ngSubmit)="submit()">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Add Currency
+                                    </div>
+
+                                    <div class="card-body">
+                                        <div class="form-group mb-3">
+                                            <label for="country">Country Currency <span class="text-danger">*</span></label>
+                                            <input type="text" id="country" formControlName="country" class="form-control">
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="code">Country Code <span class="text-danger">*</span></label>
+                                            <input type="text" id="code" formControlName="code" class="form-control">
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label for="symbol">Country Symbol <span class="text-danger">*</span></label>
+                                            <input type="text" id="symbol" formControlName="symbol" class="form-control">
+                                        </div>
+                                        <div class="row mt-4">
+                                            <div class="col-12 text-center">
+                                                <hr>
+                                                <button *ngIf="!isLoading" type="submit" class="addBtn btn btn-primary btn-lg">Add Currency</button>
+                                                <button *ngIf="isLoading" class="btn btn-primary btn-lg" type="button" disabled>
+                                                  <span class="spinner-border spinner-border-sm"
+                                                  role="status" aria-hidden="true"></span>
+                                                  Adding...
+                                                </button>
+                                            </div>
+                                            <!-- end col -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="col-xl-6">
+
+                            <div class="card">
+                                <div class="card-header">
+                                    Default Currency
+                                </div>
+                                <div class="card-body">
+                                    <div *ngFor="let curr of currencies" class="eachCurrency">
+                                        <div class="d-flex justify-content-between">
+                                            <div>
+                                                {{curr?.country}} => {{curr?.code}} (<span [innerHTML]="curr?.symbol"></span>)
+                                            </div>
+                                            <div>
+                                                <button *ngIf="curr?.c_default == 1" class="btn btn-success btn-sm mr-3">Default</button>
+
+                                                <button *ngIf="curr?.c_default != 1 && !isSetDefault" (click)="setDefaultCurrency(curr?.id)" class="btn btn-primary btn-sm mr-3">Set As Default</button>
+                                                <button *ngIf="isSetDefault && setId == curr?.id" disabled class="btn btn-primary btn-sm mr-3"><i class="fa fa-spinner fa-spin"></i></button>
+
+                                                <button *ngIf="curr?.c_default != 1" (click)="deleteCurrency(curr?.id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </section>
+
+
+            </div>
+
+        </div>
+
+      </div>
+
+      <app-admin-footer></app-admin-footer>
+  </div>
+
+</div>

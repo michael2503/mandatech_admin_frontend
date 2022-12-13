@@ -1,0 +1,247 @@
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<header class="admin-header">
+    <app-admin-header></app-admin-header>
+</header>
+
+<nav id="drawer">
+    <app-admin-nav-content [mainpage]="'generalsettings'" page="'websitesettings'"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+    <div class="container-fluid">
+
+
+
+      <div class="page-title-box">
+        <div class="d-flex justify-content-between">
+          <h4 class="page-title">Website Settings</h4>
+
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item">
+                    <a routerLink="/">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a routerLink="/settings-manager">Settings Manager</a>
+                </li>
+                <li class="breadcrumb-item active">Website Settings</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div *ngIf="authAdmin?.id == 1" class="mb-4 mt-4">
+          <h5>Last Update By: {{generalSetting?.updated_by | titlecase}}</h5>
+      </div>
+
+      <section class="web-set">
+          <form [formGroup]="form" (ngSubmit)="submit()">
+              <div class="row">
+                  <div class="col-xl-6">
+                      <div class="card card-dark">
+                          <div class="card-header text-white">
+                              General
+                          </div>
+                          <div class="card-body">
+                              <div class="form-group mb-3">
+                                  <label for="biz_name">Business Name <span class="text-danger">*</span></label>
+                                  <input type="text" formControlName="biz_name" id="biz_name" class="form-control">
+                              </div>
+
+                              <div class="form-group mb-3">
+                                  <label for="site_name">Site Name <span class="text-danger">*</span></label>
+                                  <input type="text" formControlName="site_name" id="site_name" class="form-control">
+                              </div>
+
+                              <div class="form-group mb-3">
+                                  <label for="site_title">Site Title <span class="text-danger">*</span></label>
+                                  <input type="text" formControlName="site_title" id="site_title" class="form-control">
+                              </div>
+
+                              <div class="form-group mb-3">
+                                  <label for="site_email">Email <span class="text-danger">*</span></label>
+                                  <input type="email" formControlName="site_email" id="site_email" class="form-control">
+                              </div>
+
+                              <div class="form-group mb-3">
+                                  <label for="site_url">Site URL <span class="text-danger">*</span></label>
+                                  <input type="text" formControlName="site_url" id="site_url" class="form-control">
+                              </div>
+
+                              <div class="form-group mb-3">
+                                  <label for="biz_phone">Phone Number<span class="text-danger">*</span></label>
+                                  <input type="text" formControlName="biz_phone" id="biz_phone" class="form-control">
+                              </div>
+
+                              <div class="form-group mb-3">
+                                  <label for="biz_phone_two">Phone Number<span class="text-danger">*</span></label>
+                                  <input type="text" formControlName="biz_phone_two" id="biz_phone_two" class="form-control">
+                              </div>
+
+                              <div class="form-group mb-3">
+                                  <label for="biz_addr">Business Address<span class="text-danger">*</span></label>
+                                  <input type="text" formControlName="biz_addr" id="biz_addr" class="form-control">
+                              </div>
+
+                              <div class="form-group mb-3">
+                                  <label for="biz_city">City<span class="text-danger">*</span></label>
+                                  <input type="text" formControlName="biz_city" id="biz_city" class="form-control">
+                              </div>
+
+                              <div class="form-group mb-3">
+                                  <label for="biz_state">Business state<span class="text-danger">*</span></label>
+                                  <input type="text" formControlName="biz_state" id="biz_state" class="form-control">
+                              </div>
+
+                              <div class="form-group mb-3">
+                                  <label for="biz_country">Busines Country<span class="text-danger">*</span></label>
+                                  <input type="text" formControlName="biz_country" id="biz_country" class="form-control">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+
+                  <div class="col-xl-6">
+                      <div class="card card-dark">
+                          <div class="card-header text-white">
+                              Website Favicon<span class="text-danger">*</span>
+                          </div>
+                          <div class="card card-body">
+                              <div class="adminUpload">
+                                  <div class="alert alert-danger mt-2" *ngIf="faviUploadError">
+                                      {{faviUploadError}}
+                                  </div>
+
+                                  <div class="uploadWrapper text-center" style="position: relative;">
+                                      <div *ngIf="theUploadedFav" class="deleteImg" (click)="removeUploadFav()">
+                                          <i class="fa fa-trash"></i>
+                                      </div>
+                                      <label *ngIf="removeLabelFav" class="uploadLabel" for="faviconUpld">
+                                          <i class="fa fa-upload uploadIcon"></i>
+                                          <p>Click here to upload file</p>
+                                      </label>
+
+                                      <input hidden formControlName="favicon_url">
+                                      <input type="file" hidden id="faviconUpld" class="form-control" (change)="faviconUpload($event)">
+
+                                      <div *ngIf="uploadingProgress > 0" class="progress uploadProgress">
+                                          <span class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                          Uploading...{{ uploadingProgress }}%
+                                          </span>
+                                      </div>
+
+                                      <img *ngIf="theUploadedFav" src="{{theUploadedFav}}" class="uploaded">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+
+                      <div class="card mt-3 card-dark">
+                          <div class="card-header text-white">
+                              Website Logo<span class="text-danger">*</span>
+                          </div>
+                          <div class="card-body">
+
+                              <div class="adminUpload">
+                                  <div class="alert alert-danger mt-2" *ngIf="logoUploadError">
+                                      {{logoUploadError}}
+                                  </div>
+
+                                  <div class="uploadWrapper text-center" style="position: relative;">
+                                      <div *ngIf="theUploadedLogo" class="deleteImg" (click)="removeUploadLogo()">
+                                          <i class="fa fa-trash"></i>
+                                      </div>
+                                      <label *ngIf="removeLabelLogo" class="uploadLabel" for="logoUpload">
+                                          <i class="fa fa-upload uploadIcon"></i>
+                                          <p>Click here to upload file</p>
+                                      </label>
+
+                                      <input hidden formControlName="logo_url">
+                                      <input type="file" hidden id="logoUpload" class="form-control" (change)="logoUpload($event)">
+
+                                      <div *ngIf="uploadingProgress > 0" class="progress uploadProgress">
+                                          <span class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                                          Uploading...{{ uploadingProgress }}%
+                                          </span>
+                                      </div>
+
+                                      <img *ngIf="theUploadedLogo" src="{{theUploadedLogo}}" class="uploaded">
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+
+                      <div class="card mt-3 card-dark">
+                          <div class="card-header text-white">
+                              Site Description<span class="text-danger">*</span>
+                          </div>
+                          <div class="card-body">
+                              <div class="form-group mb-3">
+                                  <textarea rows="6" formControlName="site_description" class="form-control"></textarea>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="text-center mt-5">
+                  <hr>
+
+                  <button *ngIf="!isLoading" type="submit" class="addBtn btn btn-primary">UPDATE</button>
+                  <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                    <span class="spinner-border spinner-border-sm"
+                    role="status" aria-hidden="true"></span>
+                    UPDATING...
+                  </button>
+              </div>
+          </form>
+      </section>
+
+
+
+    </div>
+  </div>
+</div>
+
+<app-admin-footer></app-admin-footer>
+
+
+<div *ngIf="showNotice">
+    <div class="adminNoteWrap">
+        <p>
+            {{theMessage}}
+            <span class="float-right pointer" (click)="closeMyNotice()"><i class="fa fa-times"></i></span>
+        </p>
+    </div>
+</div>
+
+
+<div *ngIf="showNotice">
+  <div class="adminNoteWrap">
+    <div *ngIf="justMssg">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+      </svg>
+
+      <p class="pt-3"> {{theMessage}} </p>
+      <div class="d-flex justify-content-center"><button class="btn btn-sm btn-primary" (click)="closeMyNotice()">Close</button></div>
+    </div>
+
+    <!-- <div *ngIf="deleteModal">
+      <div class="d-flex justify-content-center"><i class="fa fa-times delIcon"></i></div>
+      <p class="text-center">{{theMessage}}</p>
+      <div class="text-center mt-4 mb-2">
+          <button class="btn btn-success btn-sm mr-5" (click)="deleteTeam('', returnID)">YES</button>
+          <button class="btn btn-primary btn-sm" (click)="closeMyNotice()">NO</button>
+      </div>
+    </div> -->
+  </div>
+</div>

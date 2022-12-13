@@ -1,0 +1,117 @@
+// @import "../../../admin-shared/ui/admin-header/bootstrap4.scss";
+.grid-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    padding-top: 22px;
+}
+
+.icon-col-1 {
+    background: #d3f1f7;
+    color: #4fc6e1;
+    border: 2px solid #4fc6e1;
+}
+
+.icon-col-2 {
+    background: #e9d5f0;
+    color: #7e57c2;
+    border: 2px solid #7e57c2;
+}
+
+.icon-col-3 {
+    background: #fdedd2;
+    color: #f7b84b;
+    border: 2px solid #f7b84b;
+}
+
+.icon-col-4 {
+    background: #f8d4d9;
+    color: #f1556c;
+    border: 2px solid #f1556c;
+}
+
+.icon-col-5 {
+    background: #b5b1b2;
+    color: #363434;
+    border: 2px solid #363434;
+}
+
+.icon-col-6 {
+    background: #b6fac5;
+    color: #00bf2a;
+    border: 2px solid #00bf2a;
+}
+
+.icon-col-7 {
+    background: #a2b5fa;
+    color: #002dd1;
+    border: 2px solid #002dd1;
+}
+
+.list-group-item {
+    border-left: none;
+    border-right: none;
+    padding: 12px;
+    font-size: 15px;
+}
+
+.list-group-item span {
+    font-weight: 550
+}
+
+.header-title {
+    font-size: 17px;
+    margin: 15px;
+}
+
+.overflow-card {
+    height: 230px;
+    overflow-y: scroll;
+}
+
+.recent-overflow {
+    height: 350px;
+    overflow-y: scroll;
+}
+
+.view-pop-btn {
+    font-size: 11px;
+    padding: 2px 5px 0px 5px;
+}
+
+.breadcrumb {
+    display: flex
+}
+
+section {
+    padding-top: 0px !important;
+}
+
+.btn-primary {
+    color: #fff;
+    padding: 5px 10px;
+    font-size: 12px;
+}
+
+.eachGrid .card-body {
+    background: #141a28;
+    padding: 10px;
+}
+
+.card-header {
+    background: #141a28;
+}
+
+table td {
+    font-size: 14px !important;
+}
+
+.eahNotice{
+  border-bottom: 1px solid #ccc;
+  padding: 10px;
+  p{
+    margin-bottom: 1px;
+  }
+}

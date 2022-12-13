@@ -1,0 +1,51 @@
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle"/>
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<header class="admin-header">
+  <app-admin-header></app-admin-header>
+</header>
+
+<nav id="drawer">
+  <app-admin-nav-content [mainpage]="'accountsetting'" [page]="'editprofile'"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+    <div class="container-fluid">
+
+
+        <div class="page-title-box mb-4">
+          <div class="d-flex justify-content-between">
+            <h4 class="page-title">Edit Profile</h4>
+
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item">
+                      <a routerLink="/{{adminUrl}}">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item">
+                      <a routerLink="/{{adminUrl}}">Administrators</a>
+                  </li>
+                  <li class="breadcrumb-item active">Edit Profile</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+
+
+        <section class="web-set">
+          <div *ngIf="updateSuccess" class="alert alert-success mb-2">
+            {{updateSuccess}}
+          </div>
+
+          <app-admin-edit-form-shared
+            role="profile"
+            (feeback)="getFeedback($event)"
+          ></app-admin-edit-form-shared>
+        </section>
+
+
+    </div>
+  </div>
+</div>
+<app-admin-footer></app-admin-footer>

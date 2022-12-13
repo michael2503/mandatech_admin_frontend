@@ -1,0 +1,270 @@
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<header class="admin-header">
+    <app-admin-header></app-admin-header>
+</header>
+
+<nav id="drawer">
+    <app-admin-nav-content [mainpage]="'contentmanager'" page="'homebanner'"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+    <div class="container-fluid">
+
+
+
+      <div class="page-title-box">
+        <div class="d-flex justify-content-between">
+          <h4 class="page-title">Why Chose Us</h4>
+
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item">
+                    <a routerLink="/">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Why Chose Us</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+
+
+      <section class="web-set mt-5">
+
+
+        <form [formGroup]="form" (ngSubmit)="submit()">
+          <div class="card card-dark mb-4">
+            <div class="card-header text-white">
+              Titles
+            </div>
+
+            <div class="card-body">
+              <div class="row">
+                <div class="col-xl-6">
+                  <div class="form-group mb-3">
+                    <label for="main_title">Title <span class="text-danger">*</span></label>
+                    <input type="text" formControlName="main_title" id="main_title" class="form-control mb-0">
+                    <div *ngIf="n('main_title')?.touched && n('main_title')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-xl-6">
+                  <div class="form-group mb-3">
+                    <label for="small_title">Sub Title <span class="text-danger">*</span></label>
+                    <input type="text" formControlName="small_title" id="small_title" class="form-control mb-0">
+                    <div *ngIf="n('small_title')?.touched && n('small_title')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-xl-6">
+                  <div class="form-group mb-3">
+                    <label for="btn_title">Button Title <span class="text-danger">*</span></label>
+                    <input type="text" formControlName="btn_title" id="btn_title" class="form-control mb-0">
+                    <div *ngIf="n('btn_title')?.touched && n('btn_title')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-xl-6">
+                  <div class="form-group mb-3">
+                    <label for="btn_link">Button Link <span class="text-danger">*</span></label>
+                    <input type="url" formControlName="btn_link" id="btn_link" class="form-control mb-0">
+                    <div *ngIf="n('btn_link')?.touched && n('btn_link')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-xl-6 mb-4">
+              <div class="card card-dark">
+                <div class="card-header text-white">
+                  Mission
+                </div>
+
+                <div class="card-body">
+                  <div class="form-group mb-3">
+                    <label for="mission_title">Mission Title <span class="text-danger">*</span></label>
+                    <input type="text" formControlName="mission_title" id="mission_title" class="form-control mb-0">
+                    <div *ngIf="n('mission_title')?.touched && n('mission_title')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label for="mission_icon">Mission Icon <span class="text-danger">*</span></label>
+                    <input type="text" formControlName="mission_icon" id="mission_icon" class="form-control mb-0">
+                    <div *ngIf="n('mission_icon')?.touched && n('mission_icon')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+
+                  <div *ngIf="bannerUploadErr" class="bannerErr">
+                    <p class="mb-0">Max. Image size is: 550px By 739px</p>
+                  </div>
+                  <div class="form-group">
+                    <label>Mission Banner</label>
+                    <div class="adminUpload">
+
+                      <div class="uploadWrapper text-center" style="position: relative;">
+                          <div *ngIf="uploadedBanners" class="deleteImg" (click)="removeUploadBanner()">
+                              <i class="fa fa-trash"></i>
+                          </div>
+                          <label *ngIf="removeLabelBanner" class="uploadLabel" for="faviconUpld">
+                              <i class="fa fa-upload uploadIcon"></i>
+                              <p>Click here to upload file</p>
+                          </label>
+
+                          <input hidden formControlName="mission_banner">
+                          <input type="file" hidden id="faviconUpld" class="form-control mb-0" (change)="onloadFile($event, 'mainForm')">
+
+                          <div *ngIf="uploadingProgress > 0" class="progress uploadProgress">
+                              <span class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                              Uploading...{{ uploadingProgress }}%
+                              </span>
+                          </div>
+
+                          <img *ngIf="uploadedBanners" src="{{uploadedBanners}}" class="uploaded">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label for="mission_content">Mission Content <span class="text-danger">*</span></label>
+                    <textarea formControlName="mission_content" class="form-control mb-0" id="innovation_content" rows="5"></textarea>
+                    <div *ngIf="n('mission_content')?.touched && n('mission_content')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+
+
+            <div class="col-xl-6 mb-4">
+              <div class="card card-dark">
+                <div class="card-header text-white">
+                  Innovation
+                </div>
+
+                <div class="card-body">
+                  <div class="form-group mb-3">
+                    <label for="innovation_title">Innovation Title <span class="text-danger">*</span></label>
+                    <input type="text" formControlName="innovation_title" id="innovation_title" class="form-control mb-0">
+                    <div *ngIf="n('innovation_title')?.touched && n('innovation_title')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label for="innovation_icon">Innovation Icon <span class="text-danger">*</span></label>
+                    <input type="text" formControlName="innovation_icon" id="innovation_icon" class="form-control mb-0">
+                    <div *ngIf="n('innovation_icon')?.touched && n('innovation_icon')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+
+                  <div *ngIf="bannerUploadErr" class="bannerErr">
+                    <p class="mb-0">image size is: 550px By 739px</p>
+                  </div>
+                  <div class="form-group">
+                    <label>Innovation Banner</label>
+                    <div class="adminUpload">
+                      <div class="uploadWrapper text-center" style="position: relative;">
+                        <div *ngIf="uploadedBannersEdit" class="deleteImg" (click)="removeUploadBannerEdit()">
+                            <i class="fa fa-trash"></i>
+                        </div>
+                        <label *ngIf="removeLabelBannerEdit" class="uploadLabel" for="faviconUpldEdit">
+                            <i class="fa fa-upload uploadIcon"></i>
+                            <p>Click here to upload file</p>
+                        </label>
+
+                        <input hidden formControlName="innovation_banner">
+                        <input type="file" hidden id="faviconUpldEdit" class="form-control mb-0" (change)="onloadFile($event, 'updateForm')">
+
+                        <div *ngIf="uploadingProgress > 0" class="progress uploadProgress">
+                            <span class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
+                            Uploading...{{ uploadingProgress }}%
+                            </span>
+                        </div>
+
+                        <img *ngIf="uploadedBannersEdit" src="{{uploadedBannersEdit}}" class="uploaded">
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="form-group mb-3">
+                    <label for="innovation_content">Innovation Content <span class="text-danger">*</span></label>
+                    <textarea formControlName="innovation_content" class="form-control mb-0" id="innovation_content" rows="5"></textarea>
+                    <div *ngIf="n('innovation_content')?.touched && n('innovation_content')?.invalid" class="alert alert-danger">*This field is required!
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="card card-dark">
+            <div class="card-header text-white">
+              Contents
+            </div>
+            <div class="card-body">
+              <div class="form-group">
+                <angular-editor id="editor1" [placeholder]="'Enter text here...'" formControlName="content" [config]="editorConfig"></angular-editor>
+                <div *ngIf="n('content')?.touched && n('content')?.invalid" class="alert alert-danger">*This field is required!
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-5 text-center">
+            <button *ngIf="!isSubmitting" class="btn btn-primary" [disabled]="!form.valid">Update About Us</button>
+            <button *ngIf="isSubmitting" class="btn btn-primary disabled"><i class="fa fa-spin fa-spinner"></i> Updating...</button>
+          </div>
+
+        </form>
+
+
+
+      </section>
+
+
+
+    </div>
+  </div>
+</div>
+
+<app-admin-footer></app-admin-footer>
+
+
+
+
+
+
+<div *ngIf="showNotice">
+  <div class="adminNoteWrap">
+    <div *ngIf="justMssg">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+      </svg>
+
+      <p class="pt-3"> {{theMessage}} </p>
+      <div class="d-flex justify-content-center"><button class="btn btn-sm btn-primary" (click)="closeMyNotice()">Close</button></div>
+    </div>
+
+    <!-- <div *ngIf="deleteModal">
+      <div class="d-flex justify-content-center"><i class="fa fa-times delIcon"></i></div>
+      <p class="text-center">{{theMessage}}</p>
+      <div class="text-center mt-4 mb-2">
+          <button class="btn btn-success btn-sm mr-5" (click)="deleteBanner('', returnID)">YES</button>
+          <button class="btn btn-primary btn-sm" (click)="closeMyNotice()">NO</button>
+      </div>
+    </div> -->
+  </div>
+</div>

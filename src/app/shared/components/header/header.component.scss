@@ -1,0 +1,43 @@
+@import '../../../../themes/colors.scss';
+nav {
+    height: 94px;
+    font-weight: 500;
+}
+
+a {
+    color: #011b33;
+}
+
+.logo {
+    width: 151px;
+    display: flex;
+    align-items: center;
+    img {
+        width: 100%;
+    }
+}
+
+.menuCont {
+    flex-grow: 1;
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+    justify-content: center;
+    &>li {
+        display: flex;
+        &>a {
+            display: flex;
+            padding: 0 16px;
+            align-items: center;
+            i {
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
+.authCont {
+    a:first-child {
+        margin-right: 28px;
+    }
+}

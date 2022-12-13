@@ -1,0 +1,145 @@
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<header class="admin-header">
+    <app-admin-header></app-admin-header>
+</header>
+
+<nav id="drawer">
+    <app-admin-nav-content [mainpage]="'usermanager'" [page]="'users'"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+    <div class="container-fluid">
+
+
+        <div class="page-title-box mb-4">
+          <div class="d-flex justify-content-between">
+            <h4 class="page-title">User Details</h4>
+
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item">
+                      <a routerLink="/">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item">
+                      <a routerLink="/user-manager/all">Users</a>
+                  </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+
+        <section class="user-list">
+
+          <div class="sortWrap mb-4">
+            <div class="d-flex justify-content-between mobileView">
+                <div class="pointer tabLink" (click)="changeTab('proile')" [class.activeTab]="thePage == 'profile'"><a >Profile</a></div>
+                <div class="pointer tabLink" (click)="changeTab('orders')" [class.activeTab]="thePage == 'orders'"><a>Orders</a></div>
+                <div class="pointer tabLink" (click)="changeTab('address')" [class.activeTab]="thePage == 'address'"><a>Address</a></div>
+                <div class="pointer tabLink" (click)="changeTab('coupons')" [class.activeTab]="thePage == 'coupons'"><a>Coupons</a></div>
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="col-xl-8">
+              <div class="profileSection" *ngIf="thePage == 'profile'">
+                <app-user-profile *ngIf="user" [customer]="user"></app-user-profile>
+              </div>
+
+
+              <div class="bankSection" *ngIf="thePage == 'orders'">
+                <app-user-order *ngIf="user" [customer]="user"></app-user-order>
+              </div>
+
+
+              <div class="masterWalletSection" *ngIf="thePage == 'address'">
+                <app-user-address *ngIf="userAddress" [userAddresses]="userAddress"></app-user-address>
+              </div>
+
+              <div class="bankSection" *ngIf="thePage == 'coupons'">
+                <app-user-coupon *ngIf="user" [customer]="user"></app-user-coupon>
+              </div>
+            </div>
+
+
+            <div class="col-xl-4">
+              <div class="card">
+                <div class="card-header">User Info</div>
+                <div class="card-body p-3">
+                  <div class="d-flex justify-content-start mb-4">
+                    <div class="img">
+                      <img *ngIf="user?.photo" src="{{ user?.photo }}" alt="{{ user?.username | titlecase }}" width="70" height="70">
+                      <img *ngIf="!user?.photo" src="/assets/images/picture.png" alt="{{ user?.username | titlecase }}" width="70" height="70">
+                    </div>
+                    <div class="otherCont ml-2">
+                      <p class="mb-0">{{ user?.first_name | titlecase }} {{ user?.last_name | titlecase }}</p>
+                      <p class="mb-1" style="font-size: 14px;">{{ user?.email }}</p>
+
+                      <button *ngIf="user && user.status !== 'Active'" class="btn btn-secondary btn-sm mr-1 admin-btn-sm" disabled>{{user && user.status}}</button>
+
+                      <button *ngIf="user && user.status === 'Pending'" class="btn btn-success btn-sm mr-1 admin-btn-sm" (click)="accountAction('warning', user?.id, 'Active')">Activate</button>
+
+                      <button *ngIf="user && user.status === 'Active'" class="btn btn-danger btn-sm mr-1 admin-btn-sm" (click)="accountAction('warning', user?.id, 'Blocked')">Block</button>
+
+                      <button *ngIf="user && user.status === 'Blocked'" class="btn btn-success btn-sm mr-1 admin-btn-sm" (click)="accountAction('warning', user?.id, 'Active')">UnBlock</button>
+
+                      <button *ngIf="user && user.status === 'Active'" class="btn btn-warning btn-sm mr-1 admin-btn-sm" (click)="accountAction('warning', user?.id, 'Suspended')">Suspend</button>
+
+                      <button *ngIf="user && user.status === 'Suspended'" class="btn btn-success btn-sm mr-1 admin-btn-sm" (click)="accountAction('warning', user?.id, 'Active')">UnSuspend</button>
+
+                      <button class="btn btn-danger btn-sm mr-1 admin-btn-sm" (click)="accountAction('warning', user?.id, 'Delete')">Delete</button>
+                    </div>
+                  </div>
+                  <p class="infoList">First Name: <span class="float-right">{{ user?.first_name | titlecase }}</span></p>
+                  <p class="infoList">Last Name: <span class="float-right">{{ user?.last_name | titlecase }}</span></p>
+                  <p class="infoList">Email: <span class="float-right">{{ user?.email }}</span></p>
+                  <p class="infoList">Phone No.: <span class="float-right">{{ user?.phone }}</span></p>
+                  <p class="infoList">Status: <span class="float-right">{{ user?.status }}</span></p>
+                  <p class="infoList">Last Login: <span class="float-right">{{ user?.last_login | date }}</span></p>
+                  <p class="infoList">Signup Date: <span class="float-right">{{ user?.created_at | date }}</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+        </section>
+
+
+
+
+    </div>
+  </div>
+</div>
+<app-admin-footer></app-admin-footer>
+
+
+
+
+<div *ngIf="showNotice">
+  <div class="adminNoteWrap">
+      <div *ngIf="justMssg">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+          <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+
+        <p class="pt-3"> {{theMessage}} </p>
+        <div class="d-flex justify-content-center"><button class="btn btn-sm btn-primary" (click)="closeMyNotice()">Close</button></div>
+      </div>
+
+      <div *ngIf="deleteModal">
+          <div class="d-flex justify-content-center"><i class="fa fa-times delIcon"></i></div>
+          <p class="text-center">{{theMessage}}</p>
+          <div class="text-center mt-4 mb-2">
+              <button class="btn btn-success btn-sm mr-5" (click)="accountAction('', returnID, returnAction)">YES</button>
+              <button class="btn btn-primary btn-sm" (click)="closeMyNotice()">NO</button>
+          </div>
+      </div>
+  </div>
+</div>
+

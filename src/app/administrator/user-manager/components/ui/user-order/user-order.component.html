@@ -1,0 +1,70 @@
+<div class="card">
+  <div class="card-header">Orders</div>
+  <div class="card-body">
+
+    <div *ngIf="orders?.length > 0">
+      <div *ngFor="let order of orders" class="eachOrder">
+            <div class="card cardShadow">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-xl-3 col-lg-4 col-md-4 col-sm-4">
+                          <div class="proImg">
+                              <img src="{{ order?.prodInfo.featured_img }}" alt="">
+                          </div>
+                      </div>
+                      <div class="col-xl-9 col-lg-8 col-md-8 col-sm-8 proInfoWrapepr">
+                          <div class="proInfo">
+                              <p>{{ order?.prodInfo.product_name }}</p>
+                              <p class="pInfo">Order Number: {{ order?.order_number }}</p>
+                              <p class="pInfo">Order On: {{ order?.created_at | date }}
+                                  <span *ngIf="order?.status == 'Pending'" class="badge badge-info ml-2">Pending</span>
+                                  <span *ngIf="order?.status == 'Delivered'" class="badge badge-success ml-2">Delivered</span>
+                                  <span *ngIf="order?.status == 'Cancelled'" class="badge badge-danger ml-2">Cancelled</span>
+                                  <span *ngIf="order?.status == 'Returned'" class="badge badge-dark ml-2">Returned</span>
+                                  <span *ngIf="order?.status == 'Shipped'" class="badge badge-warning ml-2">Shipped</span>
+                              </p>
+                              <div class="d-flex justify-content-between mt-2">
+                                  <p class="pInfo">Total: ₦{{ order?.total | number }}</p>
+                                  <h4 style="font-size: 16px;"><a routerLink="/order-manager/details/{{ order?.order_number }}">Order Details</a></h4>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div *ngIf="orders?.length < 1">
+              <p class="text-center">No Order</p>
+          </div>
+      </div>
+
+      <div class="panel-footer mt-2">
+        <div class="row">
+            <div class="col-sm-6 col-xs-6">showing
+                <b>{{ orders?.length }}</b>
+                out of
+                <b>{{ orderCount }}</b>
+                entries
+            </div>
+            <div class="col-sm-6 col-xs-6">
+                <ul class="pagination hidden-xs pull-right">
+                    <button *ngIf="orderCount > 0 && !isLoadMore" (click)="loadMore()" [disabled]="orderCount <= orders.length" class="btn btn-success btn-sm">Load more</button>
+
+                    <button *ngIf="isLoadMore" disabled class="btn btn-success btn-sm">Loading <i class="fa fa-spinner fa-spin"></i></button>
+                </ul>
+            </div>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div *ngIf="orders?.length > 0">
+      <p class="mt-4 text-center">No Order</p>
+    </div>
+
+
+
+  </div>
+</div>
+

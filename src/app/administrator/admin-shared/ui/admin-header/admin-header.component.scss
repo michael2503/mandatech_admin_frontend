@@ -1,0 +1,56 @@
+.admin-dropdown-header .dropdown-toggle::after {
+  display: none;
+}
+
+.admin-pro-img {
+  width: 40px;
+  padding-top: 5px;
+}
+
+.admin-dropdown-header .dropdown-menu {
+  z-index: 0;
+}
+
+.admin-dropdown-header .admin_name {
+  font-size: 16px;
+  color: #fff;
+}
+
+.admin-dropdown-header .dropdown-menu a {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  font-size: 15px;
+}
+
+.admin-dropdown-header .dropdown-menu a i {
+  width: 20px;
+  font-size: 18px;
+}
+
+html,
+body {
+  height: 100%;
+  overflow: hidden !important
+}
+
+.dropdown-menu {
+  background: #fff !important;
+  margin-top: -10px !important;
+  -webkit-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 7px 0px rgba(0, 0, 0, 0.75);
+}
+
+.logoName {
+  font-size: 35px;
+  margin: 8px;
+  font-family: Arial;
+  font-weight: 600;
+  letter-spacing: 2px;
+  color: #000;
+  display: inline-block;
+  .small {
+      font-size: 28px;
+      color: #fff;
+  }
+}

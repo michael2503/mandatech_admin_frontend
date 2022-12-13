@@ -1,0 +1,180 @@
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<header class="admin-header">
+    <app-admin-header></app-admin-header>
+</header>
+
+<nav id="drawer">
+    <app-admin-nav-content [mainpage]="'generalsettings'" page="'configuration'"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+      <div class="container-fluid">
+
+        <div class="page-title-box">
+          <div class="d-flex justify-content-between">
+            <h4 class="page-title">Configuration</h4>
+
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item">
+                      <a routerLink="/">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item">
+                      <a routerLink="/settings-manager">Settings Manager</a>
+                  </li>
+                  <li class="breadcrumb-item active">Configuration</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <section class="web-set">
+            <div class="row">
+                <div class="col-xl-12">
+                    <form [formGroup]="form" (ngSubmit)="submit()">
+                        <div class="card card-dark">
+                            <div class="card-header text-white">
+                                Configuration Settings
+                            </div>
+                            <div class="card-body">
+
+                              <div class="row each-row">
+                                <div class="col-md-3 mt-1">
+                                    <label for="client" class="float-right">
+                                        Our Clients
+                                    </label>
+                                </div>
+                                <div class="col-md-5">
+                                    <select formControlName="client" class="form-control custom-select">
+                                        <option value="Enabled">Enabled</option>
+                                        <option value="Disabled">Disabled</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mt-1">
+                                    <label for="client">Enabled or Disabled Our client view</label>
+                                </div>
+                              </div>
+
+                              <div class="row each-row">
+                                <div class="col-md-3 mt-1">
+                                    <label for="testimony" class="float-right">
+                                        Testimonies
+                                    </label>
+                                </div>
+                                <div class="col-md-5">
+                                    <select formControlName="testimony" class="form-control custom-select">
+                                        <option value="Enabled">Enabled</option>
+                                        <option value="Disabled">Disabled</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-4 mt-1">
+                                    <label for="testimony">Enabled or Disabled testimony view</label>
+                                </div>
+                              </div>
+
+
+                              <div class="row each-row">
+                                  <div class="col-md-3 mt-1">
+                                      <label for="exp_year" class="float-right">
+                                        Experience
+                                      </label>
+                                  </div>
+                                  <div class="col-md-5">
+                                      <input type="number" class="form-control" formControlName="exp_year">
+                                  </div>
+                                  <div class="col-md-4 mt-1">
+                                      <label for="exp_year">Enter years of experience. (in Number)</label>
+                                  </div>
+                              </div>
+
+                              <div class="row each-row">
+                                  <div class="col-md-3 mt-1">
+                                      <label for="no_of_project" class="float-right">
+                                        Projects
+                                      </label>
+                                  </div>
+                                  <div class="col-md-5">
+                                      <input type="number" class="form-control" formControlName="no_of_project">
+                                  </div>
+                                  <div class="col-md-4 mt-1">
+                                      <label for="no_of_project">Enter number of projects done (in Number)</label>
+                                  </div>
+                              </div>
+
+                              <div class="row each-row">
+                                  <div class="col-md-3 mt-1">
+                                      <label for="recommendation" class="float-right">
+                                        Recommendation
+                                      </label>
+                                  </div>
+                                  <div class="col-md-5">
+                                      <input type="number" class="form-control" formControlName="recommendation">
+                                  </div>
+                                  <div class="col-md-4 mt-1">
+                                      <label for="recommendation">Number of people who has recommend you or given you an award</label>
+                                  </div>
+                              </div>
+
+
+                              <div class="row each-row">
+                                  <div class="col-md-3 mt-1">
+                                      <label for="product_sold" class="float-right">
+                                        Product Sold
+                                      </label>
+                                  </div>
+                                  <div class="col-md-5">
+                                      <input type="number" class="form-control" formControlName="product_sold">
+                                  </div>
+                                  <div class="col-md-4 mt-1">
+                                      <label for="product_sold">Enter number of product sold</label>
+                                  </div>
+                              </div>
+
+
+                              <div class="text-center mt-4">
+                                  <button *ngIf="!isLoading" type="submit" [disabled]="!form.valid" class="btn btn-primary">Update</button>
+                                  <button *ngIf="isLoading" class="btn btn-primary" type="button" disabled>
+                                      <span class="spinner-border spinner-border-sm"
+                                      role="status" aria-hidden="true"></span>
+                                      Updating...
+                                  </button>
+                              </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+      </div>
+    </div>
+
+  </div>
+
+<app-admin-footer></app-admin-footer>
+
+
+<div *ngIf="showNotice">
+  <div class="adminNoteWrap">
+    <div *ngIf="justMssg">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+      </svg>
+
+      <p class="pt-3"> {{theMessage}} </p>
+      <div class="d-flex justify-content-center"><button class="btn btn-sm btn-primary" (click)="closeMyNotice()">Close</button></div>
+    </div>
+
+    <!-- <div *ngIf="deleteModal">
+      <div class="d-flex justify-content-center"><i class="fa fa-times delIcon"></i></div>
+      <p class="text-center">{{theMessage}}</p>
+      <div class="text-center mt-4 mb-2">
+          <button class="btn btn-success btn-sm mr-5" (click)="deleteTeam('', returnID)">YES</button>
+          <button class="btn btn-primary btn-sm" (click)="closeMyNotice()">NO</button>
+      </div>
+    </div> -->
+  </div>
+</div>

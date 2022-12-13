@@ -1,0 +1,196 @@
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<header class="admin-header">
+    <app-admin-header></app-admin-header>
+</header>
+
+<nav id="drawer">
+    <app-admin-nav-content [mainpage]="'ordermanager'" [page]="'reviews'"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+    <div class="container-fluid">
+
+
+        <div class="page-title-box mb-4">
+          <div class="d-flex justify-content-between">
+            <h4 class="page-title">All Review</h4>
+
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item">
+                      <a routerLink="/">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item active">All Review</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+
+        <section class="user-list">
+          <div class="row">
+              <div class="col-xl-12">
+                <div class="sortWrap mb-4">
+                  <div class="d-flex justify-content-between mobileView">
+                      <div class="pointer tabLink" [class.activeTab]="status == 'all'"><a routerLink="/order-manager/reviews/all">All Reviews</a></div>
+                      <div class="pointer tabLink" [class.activeTab]="status == 'approved'"><a routerLink="/order-manager/reviews/approved">Approved Reviews</a></div>
+                      <div class="pointer tabLink" [class.activeTab]="status == 'pending'"><a routerLink="/order-manager/reviews/pending">Pending Reviews</a></div>
+                  </div>
+                </div>
+
+                  <div class="card card-dark">
+                      <div class="card-header">
+                          <div class="row">
+                            <div class="col-lg-6 col-md-6 text-white">
+                              <div class="view-page">
+                                <span class="text-white mr-3">Pages:</span> <select class="selectNum" (change)="selectPerPage($event)">
+                                    <option value="10">10</option>
+                                    <option value="20">20</option>
+                                    <option value="50">50</option>
+                                    <option value="100">100</option>
+                                    <option value="150">150</option>
+                                    <option value="200">200</option>
+                                </select>
+                              </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6">
+                                <div class="text-right">
+
+                                  <form class="search-form" [formGroup]="formSearch" (ngSubmit)="submit()">
+                                    <div class="input-group">
+                                      <input type="text" formControlName="keywords" class="form-control searchInput" placeholder="Search by name, product, star number">
+                                      <div class="input-group-append">
+                                        <button *ngIf="!isSearching" class="btn btn-success" type="submit">Go</button>
+                                        <button *ngIf="isSearching" class="btn btn-success disabled" disabled type="button"><i class="fa fa-spinner fa-spin"></i></button>
+                                        <button class="btn btn-danger" type="button" (click)="canselSearch()">Cancel</button>
+                                      </div>
+                                    </div>
+
+                                  </form>
+
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+
+                      <div class="card-body">
+                          <div class="table-responsive">
+                              <table class="table table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th>Full Name</th>
+                                          <th>Product</th>
+                                          <th>Star Rate</th>
+                                          <th>Status</th>
+                                          <th>Created</th>
+                                          <th></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody *ngIf="reviewCounts > 0">
+                                      <tr *ngFor="let review of reviews">
+                                          <td>
+                                            {{review.first_name | titlecase}} {{review.last_name | titlecase}}
+                                          </td>
+                                          <td><a routerLink="https://mandatechgroup.com/products/{{ review?.pid }}/{{ review?.name_slug }}" target="_blank" class="text-dark">{{review.name}}</a></td>
+                                          <td class="starSec">
+                                            <div *ngIf="review.star_rate == 1">
+                                              <span class="fa fa-star"></span>
+                                            </div>
+                                            <div *ngIf="review.star_rate == 2">
+                                              <span class="fa fa-star"></span>
+                                              <span class="fa fa-star"></span>
+                                            </div>
+                                            <div *ngIf="review.star_rate == 3">
+                                              <span class="fa fa-star"></span>
+                                              <span class="fa fa-star"></span>
+                                              <span class="fa fa-star"></span>
+                                            </div>
+                                            <div *ngIf="review.star_rate == 4">
+                                              <span class="fa fa-star"></span>
+                                              <span class="fa fa-star"></span>
+                                              <span class="fa fa-star"></span>
+                                              <span class="fa fa-star"></span>
+                                            </div>
+                                            <div *ngIf="review.star_rate == 5">
+                                              <span class="fa fa-star"></span>
+                                              <span class="fa fa-star"></span>
+                                              <span class="fa fa-star"></span>
+                                              <span class="fa fa-star"></span>
+                                              <span class="fa fa-star"></span>
+                                            </div>
+                                          </td>
+                                          <td>
+                                            <span *ngIf="review?.status == 1" class="badge badge-success">Approved</span>
+                                            <span *ngIf="review?.status == 0" class="badge badge-danger">Pending</span>
+                                          </td>
+                                          <td>{{review.created_at | date}}</td>
+                                          <td class="text-center">
+                                              <a routerLink="/order-manager/reviews/edit/{{review?.id}}" class="btn btn-success admin-btn-sm btn-sm mr-3"><i class="fa fa-edit"></i> </a>
+                                              <button type="button" (click)="deleteRev('warning', review?.id)" class="btn btn-danger admin-btn-sm btn-sm"><i class="fa fa-trash"></i> </button>
+                                          </td>
+                                      </tr>
+                                  </tbody>
+                                  <tbody *ngIf="reviewCounts < 1">
+                                    <tr>
+                                      <td colspan="6" class="text-center">No Review</td>
+                                    </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+
+                          <div class="panel-footer mt-2">
+                            <div class="row">
+                                <div class="col-sm-6 col-xs-6">showing
+                                    <b>{{ reviews?.length }}</b>
+                                    out of
+                                    <b>{{ reviewCounts }}</b>
+                                    entries
+                                </div>
+                                <div class="col-sm-6 col-xs-6">
+                                    <ul class="pagination hidden-xs pull-right">
+                                        <button *ngIf="reviewCounts > 0 && !isLoadMore" (click)="loadMore()" [disabled]="reviewCounts <= reviews.length" class="btn btn-success btn-sm">Load more</button>
+
+                                        <button *ngIf="isLoadMore" disabled class="btn btn-success">Loading <i class="fa fa-spinner fa-spin"></i></button>
+                                    </ul>
+                                </div>
+                            </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </section>
+
+
+
+
+    </div>
+  </div>
+</div>
+<app-admin-footer></app-admin-footer>
+
+
+<div *ngIf="showNotice">
+  <div class="adminNoteWrap">
+    <div *ngIf="justMssg">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+      </svg>
+
+      <p class="pt-3"> {{theMessage}} </p>
+      <div class="d-flex justify-content-center"><button class="btn btn-sm btn-primary" (click)="closeMyNotice()">Close</button></div>
+    </div>
+
+    <div *ngIf="deleteModal">
+      <div class="d-flex justify-content-center"><i class="fa fa-times delIcon"></i></div>
+      <p class="text-center">{{theMessage}}</p>
+      <div class="text-center mt-4 mb-2">
+          <button class="btn btn-success btn-sm mr-5" (click)="deleteRev('', returnID)">YES</button>
+          <button class="btn btn-primary btn-sm" (click)="closeMyNotice()">NO</button>
+      </div>
+    </div>
+  </div>
+</div>

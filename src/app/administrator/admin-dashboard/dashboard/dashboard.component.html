@@ -1,0 +1,292 @@
+<header class="admin-header">
+  <app-admin-header></app-admin-header>
+</header>
+
+<nav id="drawer">
+  <app-admin-nav-content [mainpage]="'dashboard'" [page]="'dashboard'"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+    <div class="container-fluid">
+
+
+      <div class="page-title-box mb-4">
+        <div class="d-flex justify-content-between">
+          <h4 class="page-title">Dashboard</h4>
+
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item">
+                    <a routerLink="/">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+
+      <section class="dashboard">
+        <div class="row">
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-4 eachGrid">
+              <div class="card card-body">
+                  <div class="d-flex justify-content-between">
+                      <div class="no_user">
+                          <i class="fa fa-users grid-icon icon-col-1"></i>
+                      </div>
+                      <div class="no_user mt-4">
+                          <h4 class="text-white">{{ info?.allUser | number }}</h4>
+                          <p class="text-white">All Users</p>
+                      </div>
+                  </div>
+              </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-4 eachGrid">
+            <div class="card card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="no_user">
+                        <i class="fa fa-users grid-icon icon-col-1"></i>
+                    </div>
+                    <div class="no_user mt-4">
+                        <h4 class="text-white">{{ info?.allStaff | number }}</h4>
+                        <p class="text-white">All Staff</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-4 eachGrid">
+            <div class="card card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="no_user">
+                        <i class="fa fa-users grid-icon icon-col-1"></i>
+                    </div>
+                    <div class="no_user mt-4">
+                        <h4 class="text-white">{{ info?.allProduct | number }}</h4>
+                        <p class="text-white">All Products</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-4 eachGrid">
+            <div class="card card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="no_user">
+                        <i class="fa fa-users grid-icon icon-col-1"></i>
+                    </div>
+                    <div class="no_user mt-4">
+                        <h4 class="text-white">{{ info?.allOrders | number }}</h4>
+                        <p class="text-white">All Orders</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-4 eachGrid">
+            <div class="card card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="no_user">
+                        <i class="fa fa-users grid-icon icon-col-1"></i>
+                    </div>
+                    <div class="no_user mt-4">
+                        <h4 class="text-white">{{ info?.allCoupon | number }}</h4>
+                        <p class="text-white">All Coupons</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-4 eachGrid">
+            <div class="card card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="no_user">
+                        <i class="fa fa-users grid-icon icon-col-1"></i>
+                    </div>
+                    <div class="no_user mt-4">
+                        <h4 class="text-white">{{ info?.deliveredOrder | number }}</h4>
+                        <p class="text-white">Delivered Order</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-4 eachGrid">
+            <div class="card card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="no_user">
+                        <i class="fa fa-users grid-icon icon-col-1"></i>
+                    </div>
+                    <div class="no_user mt-4">
+                        <h4 class="text-white">{{ info?.pendingOrder | number }}</h4>
+                        <p class="text-white">Pending Order</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-4 eachGrid">
+            <div class="card card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="no_user">
+                        <i class="fa fa-users grid-icon icon-col-1"></i>
+                    </div>
+                    <div class="no_user mt-4">
+                        <h4 class="text-white">{{ info?.sumProductSold | number }}</h4>
+                        <p class="text-white">Product Sold Price</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-4 eachGrid">
+            <div class="card card-body">
+                <div class="d-flex justify-content-between">
+                    <div class="no_user">
+                        <i class="fa fa-users grid-icon icon-col-1"></i>
+                    </div>
+                    <div class="no_user mt-4">
+                        <h4 class="text-white">{{ info?.sumCoupon | number }}</h4>
+                        <p class="text-white">Coupon Price</p>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+        </div>
+
+
+        <div class="row">
+          <div class="col-xl-6 mb-4">
+            <div class="card card-dark">
+              <div class="card-header text-white">Recent Users</div>
+              <div class="card-body p-0"  style="height: 348px; overflow-y: auto;">
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr>
+                              <th>Email</th>
+                              <th>Created</th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody *ngIf="info?.topFiveUser.length > 0">
+                          <tr *ngFor="let user of info?.topFiveUser">
+                            <td>{{ user?.email }}</td>
+
+                            <td>{{user.created_at | date}}</td>
+                            <td>
+                              <a routerLink="/user-manager/info/{{ user?.id }}" class="btn btn-success btn-sm mr-3"><i class="fa fa-eye"></i></a>
+                            </td>
+                          </tr>
+                      </tbody>
+
+                      <tbody *ngIf="info?.topFiveUser.length < 1">
+                        <tr>
+                          <td colspan="6" class="text-center">No Users</td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-xl-6 mb-4">
+            <div class="card card-dark">
+              <div class="card-header text-white">Recent Orders</div>
+              <div class="card-body p-0" style="height: 348px; overflow-y: auto;">
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr>
+                              <th>Order Number</th>
+                              <th>Created</th>
+                              <th></th>
+                          </tr>
+                      </thead>
+                      <tbody *ngIf="info?.topFiveOrder.length > 0">
+                          <tr *ngFor="let order of info?.topFiveOrder">
+                            <td>{{ order?.order_number }}</td>
+
+                            <td>{{order.created_at | date}}</td>
+                            <td>
+                              <a routerLink="/order-manager/details/{{ order?.order_number }}" class="btn btn-success btn-sm mr-3"><i class="fa fa-eye"></i></a>
+                            </td>
+                          </tr>
+                      </tbody>
+
+                      <tbody *ngIf="info?.topFiveOrder.length < 1">
+                        <tr>
+                          <td colspan="6" class="text-center">No Order</td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-xl-6 mb-4">
+            <div class="card card-dark">
+              <div class="card-header text-white">Recently Userd Coupon</div>
+              <div class="card-body p-0" style="height: 348px; overflow-y: auto;">
+                <div class="table-responsive">
+                  <table class="table table-bordered">
+                      <thead>
+                          <tr>
+                              <th>Coupon Code</th>
+                              <th>Order Number</th>
+                              <th>Date Used</th>
+                          </tr>
+                      </thead>
+                      <tbody *ngIf="info?.usedCoupon.length > 0">
+                          <tr *ngFor="let coupon of info?.usedCoupon">
+                            <td>{{ coupon?.coupon }}</td>
+                            <td>{{ coupon?.order_number }}</td>
+
+                            <td>{{coupon.date_used | date}}</td>
+                          </tr>
+                      </tbody>
+
+                      <tbody *ngIf="info?.usedCoupon.length < 1">
+                        <tr>
+                          <td colspan="6" class="text-center">No Coupon Used</td>
+                        </tr>
+                      </tbody>
+                  </table>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <div class="col-xl-6 mb-4">
+            <div class="card card-dark">
+              <div class="card-header text-white">Notifications</div>
+              <div class="card-body p-0" style="height: 348px; overflow-y: auto;">
+                <div *ngFor="let review of reviewNotice" class="eahNotice">
+                  <p>{{ review?.first_name }} {{ review?.last_name }}</p>
+                  <p><small>has rate a product <a routerLink="/order-manager/reviews/edit/{{ review?.id }}"><b>click here</b> to view</a></small></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+
+<app-admin-footer></app-admin-footer>

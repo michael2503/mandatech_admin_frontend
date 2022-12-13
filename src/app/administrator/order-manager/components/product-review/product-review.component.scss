@@ -1,0 +1,68 @@
+@import '../../../../../themes/colors.scss';
+
+.user-list table tr td{
+  padding: 15px 12px 5px 12px;
+  font-size: 14px;
+}
+.user-list table tr td.table-img{
+  padding: 5px 12px !important;
+  img{
+    height: 40px;
+    width: 40px;
+  }
+}
+
+input, textarea, select{
+  background: #fff !important;
+  color: #000 !important;
+  padding: 10px !important;
+}
+thead{
+  border-top: 1px solid #ccc;
+}
+.searchInput{
+  height: 40px;
+  border-radius: 0px;
+}
+.starSec {
+  .fa-star{
+    color: #FF9529;
+  }
+}
+
+.selectNum{
+  height: 30px;
+  padding: 2px !important;
+  margin-bottom: 0px;
+}
+
+
+.activeTab {
+  background: $primary;
+  border-radius: 5px;
+  a{
+    color: #fff !important;
+  }
+}
+
+.tabLink {
+  padding: 12px 0px;
+  font-weight: 550;
+  font-size: 15px;
+  a{
+    color: #555;
+    padding: 12px 20px 13px !important;
+  }
+}
+.sortWrap{
+  border: 1px solid #ccc;
+  background: #fff;
+  margin-top: 30px;
+  padding: 5px 5px;
+  border-radius: 10px;
+}
+@media only screen and (max-width: 520px){
+  .mobileView{
+    display: block !important;
+  }
+}

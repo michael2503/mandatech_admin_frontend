@@ -1,0 +1,95 @@
+@import '../../../../themes/colors.scss';
+.superParent {
+    width: 100%;
+}
+
+.countDown {
+    color: #000;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    // align-items: center;
+}
+
+.center {
+    width: fit-content;
+    margin: auto;
+}
+
+.days,
+.hours,
+.minutes,
+.seconds {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+span {
+    font-weight: 500;
+}
+
+.small {
+    font-size: 25px;
+    font-weight: 500;
+    line-height: 22px;
+}
+
+.big {
+    font-size: 40px;
+    height: 77px;
+    display: flex;
+    overflow: hidden;
+    color: #000;
+    // background: radial-gradient(to bottom, #9ccabbb2 70%, $primary);
+    background: #9ccabbb2;
+    box-shadow: inset 0px -8px 15px $primary;
+    border: 1px solid #ffffff;
+}
+
+.divider {
+    margin: 0 10px;
+    font-weight: 600;
+    font-size: 45px;
+}
+
+#dl,
+#dr,
+#hl,
+#hr,
+#ml,
+#mr,
+#sl,
+#sr {
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    transition: "0s";
+}
+
+// #sr:hover {
+//     transform: translateY(-10%);
+// }
+.big span {
+    display: block;
+    line-height: 77px;
+    padding: 0 10px;
+    font-weight: 600;
+}
+
+.big div:last-child {
+    border-left: 1px solid #ffffff;
+}
+
+.late .big span {
+    // background: linear-gradient(#ff000042 80%, #860000);
+    background: #ff000042;
+    box-shadow: inset 1px 2px 15px #860000, inset 0px -7px 15px #860000;
+    color: #7c0000;
+}
+
+.late .small {
+    color: #7c0000;
+}

@@ -1,0 +1,15 @@
+.carouselParent {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+}
+
+::ng-deep .flexCont {
+    display: flex;
+    position: relative;
+}
+
+::ng-deep .slideItem:not(:last-child) {
+    // flex-grow: 1;
+    margin-right: 30px;
+}

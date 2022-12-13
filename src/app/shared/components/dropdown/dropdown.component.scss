@@ -1,0 +1,24 @@
+.cusDropdown {
+    position: relative;
+}
+
+::ng-deep .clickable {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+::ng-deep .dropped {
+    position: absolute;
+    top: 100%;
+    display: none;
+    width: 217px;
+    border-radius: 4px;
+    background: #fff;
+    left: 0;
+}
+
+::ng-deep .dropped.cusShow {
+    display: block;
+}

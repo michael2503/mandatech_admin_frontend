@@ -1,0 +1,211 @@
+
+<div id="mySidenav" class="sidenav">
+  <div class="d-flex justify-content-between sideBarTop">
+      <div id="logo" style="width: 80px;height: 60px;margin-top: -11px;">
+          <a class="navbar-brand" routerLink="/">
+              <img src="{{webSet?.logo_url}}" width="120px">
+          </a>
+      </div>
+      <div class="remove-mobile">
+          <div (click)="toggleCloseSideNav()" id="minimizeNav" class="nav-action-icon"><i class="menu-list-icon icon-logout"></i></div>
+          <div (click)="toggleOpenSideNav()" id="maximizeNav" class="nav-action-icon ml-2"><i class="menu-list-icon icon-login"></i></div>
+      </div>
+  </div>
+
+  <div id="menu-wrapper"  class="linkList">
+      <div class="adminInfo" id="adminInfo">
+          <div class="d-flex justify-content-start">
+              <div class="img mr-2">
+                  <img src="assets/images/user1.jpg">
+              </div>
+              <div class="names">
+                  <h3>{{admin?.full_name | titlecase}}</h3>
+                  <p>{{admin?.username | titlecase}}</p>
+                  <p class="online"><i class="menu-list-icon fa fa-circle" style="font-size: 8px;"></i> Online</p>
+              </div>
+          </div>
+      </div>
+
+
+      <div class="navList">
+
+        <a (click)="toggle('administrator')" [class.isActive]="mainpage == 'dashboard'" routerLink="/dashboard" class="list-group-item list-group-item-action"><i class="menu-list-icon fa fa-dashboard"></i> Dashboard</a>
+
+
+        <div class="dropdown-wrapper">
+            <div class="dropdown-click" (click)="toggle('general-settings')">
+                <a class="list-group-item list-group-item-action">
+                    <i class="menu-list-icon fa fa-cog"></i> General Settings
+                    <span class="pull-right">
+                      <i *ngIf="role === 'general-settings'" class="fa fa-angle-down"></i>
+                      <i *ngIf="role !== 'general-settings'" class="fa fa-angle-right"></i>
+                    </span>
+                </a>
+            </div>
+            <div class="dropdownMenu" *ngIf="role === 'general-settings' || mainpage == 'generalsettings'">
+                <a routerLinkActive="isActive" routerLink="/settings-manager/website-settings" class="list-group-item list-group-item-action">Website Settings</a>
+
+
+                <a routerLinkActive="isActive" routerLink="/settings-manager/social-settings" class="list-group-item list-group-item-action">Social Settings</a>
+
+                <a routerLinkActive="isActive" routerLink="/settings-manager/configuration" class="list-group-item list-group-item-action">Configuration</a>
+                <a routerLinkActive="isActive" routerLink="/settings-manager/bank-accounts" class="list-group-item list-group-item-action">Bank Accounts</a>
+            </div>
+        </div>
+
+
+        <div *ngIf="isRootAdmin" class="dropdown-wrapper">
+            <div class="dropdown-click" (click)="toggle('admin-manager')">
+                <a class="list-group-item list-group-item-action">
+                    <i class="menu-list-icon fa fa-address-book"></i> Staff Manager
+                    <span class="pull-right">
+                      <span class="pull-right">
+                        <i *ngIf="role === 'admin-manager'" class="fa fa-angle-down"></i>
+                        <i *ngIf="role !== 'admin-manager'" class="fa fa-angle-right"></i>
+                      </span>
+                    </span>
+                </a>
+            </div>
+            <div class="dropdownMenu" *ngIf="role === 'admin-manager' || mainpage == 'adminmanager'">
+                <a [class.isActive]="page == 'administrators'" routerLink="/staff-manager" class="list-group-item list-group-item-action">All Staff</a>
+
+                <a [class.isActive]="page == 'addadmin'" routerLink="/staff-manager/add-admin" class="list-group-item list-group-item-action">Add New Staff</a>
+            </div>
+        </div>
+
+        <div class="dropdown-wrapper">
+            <div class="dropdown-click" (click)="toggle('account-settings')">
+                <a class="list-group-item list-group-item-action">
+                    <i class="menu-list-icon fa fa-cogs"></i> Account Settings
+                    <span class="pull-right">
+                      <span class="pull-right">
+                        <i *ngIf="role === 'account-settings'" class="fa fa-angle-down"></i>
+                        <i *ngIf="role !== 'account-settings'" class="fa fa-angle-right"></i>
+                      </span>
+                    </span>
+                </a>
+            </div>
+            <div class="dropdownMenu" *ngIf="role === 'account-settings' || mainpage == 'accountsetting'">
+                <a routerLinkActive="isActive" routerLink="/staff-manager/profile" class="list-group-item list-group-item-action">Edit Profile</a>
+
+                <a routerLinkActive="isActive" routerLink="/staff-manager/change-password" class="list-group-item list-group-item-action">Change Password</a>
+            </div>
+        </div>
+
+
+        <div class="dropdown-wrapper">
+            <div class="dropdown-click" (click)="toggle('content-manager')">
+                <a class="list-group-item list-group-item-action">
+                    <i class="menu-list-icon fa fa-pencil-square-o"></i> Content Manager
+                    <span class="pull-right">
+                      <i *ngIf="role === 'content-manager'" class="fa fa-angle-down"></i>
+                      <i *ngIf="role !== 'content-manager'" class="fa fa-angle-right"></i>
+                    </span>
+                </a>
+            </div>
+            <div class="dropdownMenu" *ngIf="role === 'content-manager' || mainpage == 'contentmanager'">
+                <a routerLinkActive="isActive" routerLink="/content/home-banner" class="list-group-item list-group-item-action">Home Banners</a>
+                <a routerLinkActive="isActive" routerLink="/content/about-service" class="list-group-item list-group-item-action">About Our Service</a>
+                <a routerLinkActive="isActive" routerLink="/content/about-us" class="list-group-item list-group-item-action">About Us</a>
+                <a routerLinkActive="isActive" routerLink="/content/why-chose-us" class="list-group-item list-group-item-action">Why Chose Us</a>
+                <a routerLinkActive="isActive" routerLink="/content/company-history" class="list-group-item list-group-item-action">Company History</a>
+                <a routerLinkActive="isActive" routerLink="/content/our-team" class="list-group-item list-group-item-action">Our Team</a>
+                <a routerLinkActive="isActive" routerLink="/content/our-client" class="list-group-item list-group-item-action">Our Cients</a>
+            </div>
+        </div>
+
+
+
+        <div class="dropdown-wrapper">
+          <div class="dropdown-click" (click)="toggle('service-manager')">
+              <a class="list-group-item list-group-item-action">
+                <i class="menu-list-icon fa fa-users"></i> Service Manager
+                <span class="pull-right">
+                  <i *ngIf="role === 'service-manager'" class="fa fa-angle-down"></i>
+                  <i *ngIf="role !== 'service-manager'" class="fa fa-angle-right"></i>
+                </span>
+              </a>
+          </div>
+          <div class="dropdownMenu" *ngIf="role === 'service-manager' || mainpage == 'servicemanager'">
+              <a [class.isActive]="page == 'mainservice'" routerLink="/services/category" class="list-group-item list-group-item-action">Sevices Category</a>
+              <a [class.isActive]="page == 'service'" routerLink="/services" class="list-group-item list-group-item-action">Sevices</a>
+              <a [class.isActive]="page == 'addservice'" routerLink="/services/add" class="list-group-item list-group-item-action">Add Service</a>
+          </div>
+        </div>
+
+        <div class="dropdown-wrapper">
+          <div class="dropdown-click" (click)="toggle('product-manager')">
+              <a class="list-group-item list-group-item-action">
+                <i class="menu-list-icon fa fa-users"></i> Product Manager
+                <span class="pull-right">
+                  <i *ngIf="role === 'product-manager'" class="fa fa-angle-down"></i>
+                  <i *ngIf="role !== 'product-manager'" class="fa fa-angle-right"></i>
+                </span>
+              </a>
+          </div>
+          <div class="dropdownMenu" *ngIf="role === 'product-manager' || mainpage == 'productmanager'">
+            <a [class.isActive]="page == 'products'" routerLink="/products" class="list-group-item list-group-item-action">Products</a>
+            <a [class.isActive]="page == 'addproduct'" routerLink="/products/add" class="list-group-item list-group-item-action">Add Product</a>
+            <a [class.isActive]="page == 'category'" routerLink="/products/category" class="list-group-item list-group-item-action">Categories</a>
+          </div>
+        </div>
+
+        <a (click)="toggle('administrator')" [class.isActive]="mainpage == 'usermanager'" routerLink="/user-manager/all" class="list-group-item list-group-item-action"><i class="menu-list-icon fa fa-dashboard"></i> Manage Users</a>
+
+        <div class="dropdown-wrapper">
+          <div class="dropdown-click" (click)="toggle('order-manager')">
+              <a class="list-group-item list-group-item-action">
+                <i class="menu-list-icon fa fa-users"></i> Order Manager
+                <span class="pull-right">
+                  <i *ngIf="role === 'order-manager'" class="fa fa-angle-down"></i>
+                  <i *ngIf="role !== 'order-manager'" class="fa fa-angle-right"></i>
+                </span>
+              </a>
+          </div>
+          <div class="dropdownMenu" *ngIf="role === 'order-manager' || mainpage == 'ordermanager'">
+            <a [class.isActive]="page == 'orders'" routerLink="/order-manager/all" class="list-group-item list-group-item-action">Orders</a>
+            <a [class.isActive]="page == 'reviews'" routerLink="/order-manager/reviews/all" class="list-group-item list-group-item-action">Review</a>
+            <a [class.isActive]="page == 'coupons'" routerLink="/order-manager/coupons/all" class="list-group-item list-group-item-action">Coupons</a>
+          </div>
+        </div>
+
+
+        <div class="dropdown-wrapper">
+          <div class="dropdown-click" (click)="toggle('testimonial-manager')">
+              <a class="list-group-item list-group-item-action">
+                <i class="menu-list-icon fa fa-file-text"></i> Testimonial Manager
+                <span class="pull-right">
+                  <i *ngIf="role === 'testimonial-manager'" class="fa fa-angle-down"></i>
+                  <i *ngIf="role !== 'testimonial-manager'" class="fa fa-angle-right"></i>
+                </span>
+              </a>
+          </div>
+          <div class="dropdownMenu" *ngIf="role === 'testimonial-manager' || mainpage == 'testimonialmanager'">
+              <a routerLinkActive="isActive" routerLink="/testimonial" class="list-group-item list-group-item-action">Testimonials</a>
+              <a routerLinkActive="isActive" routerLink="/testimonial/post" class="list-group-item list-group-item-action">Add Testimony</a>
+          </div>
+        </div>
+
+
+        <div class="dropdown-wrapper">
+          <div class="dropdown-click" (click)="toggle('project-manager')">
+              <a class="list-group-item list-group-item-action">
+                <i class="menu-list-icon fa fa-file-text"></i> Projects
+                <span class="pull-right">
+                  <i *ngIf="role === 'project-manager'" class="fa fa-angle-down"></i>
+                  <i *ngIf="role !== 'project-manager'" class="fa fa-angle-right"></i>
+                </span>
+              </a>
+          </div>
+          <div class="dropdownMenu" *ngIf="role === 'project-manager' || mainpage == 'projectmanager'">
+              <a [class.isActive]="page == 'project'" routerLink="/projects" class="list-group-item list-group-item-action">Projects</a>
+              <a [class.isActive]="page == 'addproject'" routerLink="/projects/add" class="list-group-item list-group-item-action">Add Project</a>
+          </div>
+        </div>
+
+        <a (click)="logout()" class="list-group-item list-group-item-action logout"><i class="menu-list-icon fa fa-sign-out"></i> Logout</a>
+
+      </div>
+
+  </div>
+</div>

@@ -1,0 +1,149 @@
+<div class="card">
+  <div class="card-header">Coupons</div>
+  <div class="card-body">
+
+    <div class="table-responsive">
+      <table class="table table-bordered">
+          <thead>
+              <tr>
+                  <th>Coupon Code</th>
+                  <th>Amount</th>
+                  <th>Status</th>
+                  <th>Created</th>
+                  <th></th>
+              </tr>
+          </thead>
+          <tbody *ngIf="coupons?.length > 0">
+              <tr *ngFor="let coupon of coupons">
+                <td>{{ coupon?.coupon }}</td>
+                <td>₦{{ coupon?.amount | number }}</td>
+                <td>
+                  <span *ngIf="coupon?.status == 'Active'" class="badge badge-success">Active</span>
+                  <span *ngIf="coupon?.status == 'Used'" class="badge badge-danger">Used</span>
+                </td>
+
+                <td>{{coupon.created_at | date}}</td>
+
+                <td>
+                  <button class="btn btn-success btn-sm mr-3" [openModal]="couponInfo" (click)="singleCoupon(coupon?.id)" ><i class="fa fa-eye"></i></button>
+                  <button *ngIf="coupon?.status == 'Active'" (click)="deleteBanner('warning', coupon?.id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                  <button *ngIf="coupon?.status == 'Used'" disabled class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                </td>
+              </tr>
+          </tbody>
+
+          <tbody *ngIf="coupons?.length < 1">
+            <tr>
+              <td colspan="6" class="text-center">No Coupon</td>
+            </tr>
+          </tbody>
+      </table>
+    </div>
+
+    <div class="panel-footer mt-2">
+      <div class="row">
+          <div class="col-sm-6 col-xs-6">showing
+              <b>{{ coupons?.length }}</b>
+              out of
+              <b>{{ couponCount }}</b>
+              entries
+          </div>
+          <div class="col-sm-6 col-xs-6">
+              <ul class="pagination hidden-xs pull-right">
+                  <button *ngIf="couponCount > 0 && !isLoadMore" (click)="loadMore()" [disabled]="couponCount <= coupons.length" class="btn btn-success btn-sm">Load more</button>
+
+                  <button *ngIf="isLoadMore" disabled class="btn btn-success">Loading <i class="fa fa-spinner fa-spin"></i></button>
+              </ul>
+          </div>
+      </div>
+
+    </div>
+
+
+  </div>
+</div>
+
+
+<div id="modals">
+  <app-modal #couponInfo [closeModal]="closeModal">
+    <div class="modalContent" style="background: #fff !important;">
+        <div class="modalHead">
+          <div class="d-flex justify-content-between">
+            <div>
+              <h5 class="text-dark">Coupon Info</h5>
+            </div>
+
+            <div>
+              <span class="closeBtn">
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12.026 0L7 5.026L1.974 0L0 1.974L5.026 7L0 12.026L1.974 14L7 8.974L12.026 14L14 12.026L8.974 7L14 1.974L12.026 0Z"
+                        fill="#fff" />
+                </svg>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div class="modalBody" style="overflow-y: auto; height: 350px;">
+          <div class="formBody">
+            <div class="d-flex justify-content-between mb-3">
+              <p class="mb-0">Coupon</p>
+              <p class="mb-0">{{ copInfo?.coupon }}</p>
+            </div>
+            <div class="d-flex justify-content-between mb-3 mt-4">
+              <p class="mb-0">Owner</p>
+              <p class="mb-0">{{ copInfo?.first_name | titlecase }} {{ copInfo?.laste_name | titlecase }}</p>
+            </div>
+            <div class="d-flex justify-content-between mb-3 mt-4">
+              <p class="mb-0">Amount</p>
+              <p class="mb-0">₦{{ copInfo?.amount | number }}</p>
+            </div>
+            <div class="d-flex justify-content-between mb-3 mt-4">
+              <p class="mb-0">Created On</p>
+              <p class="mb-0">{{ copInfo?.created_at | date }}</p>
+            </div>
+            <div class="d-flex justify-content-between mb-3 mt-4">
+              <p class="mb-0">Date Used</p>
+              <p class="mb-0">{{ copInfo?.date_used | date }}</p>
+            </div>
+            <div *ngIf="copInfo?.order_number" class="d-flex justify-content-between mb-3 mt-4">
+              <p class="mb-0">Order Number</p>
+              <p class="mb-0">{{ copInfo?.order_number }}</p>
+            </div>
+            <div class="d-flex justify-content-between mb-3 mt-4">
+              <p class="mb-0">Status</p>
+              <p class="mb-0">
+                <span *ngIf="copInfo?.status == 'Active'" class="badge badge-success">Active</span>
+                <span *ngIf="copInfo?.status == 'Used'" class="badge badge-danger">Used</span>
+              </p>
+            </div>
+          </div>
+        </div>
+    </div>
+  </app-modal>
+</div>
+
+
+<div *ngIf="showNotice">
+  <div class="adminNoteWrap">
+      <div *ngIf="justMssg">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+          <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+
+        <p class="pt-3"> {{theMessage}} </p>
+        <div class="d-flex justify-content-center"><button class="btn btn-sm btn-primary" (click)="closeMyNotice()">Close</button></div>
+      </div>
+
+      <div *ngIf="deleteModal">
+          <div class="d-flex justify-content-center"><i class="fa fa-times delIcon"></i></div>
+          <p class="text-center">{{theMessage}}</p>
+          <div class="text-center mt-4 mb-2">
+              <button class="btn btn-success btn-sm mr-5" (click)="deleteBanner('', returnID)">YES</button>
+              <button class="btn btn-primary btn-sm" (click)="closeMyNotice()">NO</button>
+          </div>
+      </div>
+  </div>
+</div>

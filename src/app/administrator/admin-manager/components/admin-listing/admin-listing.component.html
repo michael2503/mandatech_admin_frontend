@@ -1,0 +1,128 @@
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<header class="admin-header">
+    <app-admin-header></app-admin-header>
+</header>
+
+<nav id="drawer">
+    <app-admin-nav-content [mainpage]="'adminmanager'" [page]="'administrators'"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+    <div class="container-fluid">
+
+
+        <div class="page-title-box mb-4">
+          <div class="d-flex justify-content-between">
+            <h4 class="page-title">All Staff</h4>
+
+            <div class="page-title-right">
+              <ol class="breadcrumb m-0">
+                  <li class="breadcrumb-item">
+                      <a routerLink="/">Dashboard</a>
+                  </li>
+                  <li class="breadcrumb-item">
+                      <a routerLink="/admin-manager">Staff</a>
+                  </li>
+                  <li class="breadcrumb-item active">All Staff</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+
+        <section class="user-list">
+          <div class="row">
+              <div class="col-xl-12">
+                  <div class="card card-dark">
+                      <div class="card-header">
+                          <div class="row">
+                              <div class="col-lg-6 col-md-6 text-white">
+                                  Staff
+                              </div>
+                              <div class="col-lg-6 col-md-6">
+                                  <div class="text-right">
+                                    <div class="input-group">
+                                      <input type="text" class="form-control searchInput" placeholder="Search by name, username and email">
+                                      <div class="input-group-append">
+                                        <button class="btn btn-success" type="button">OK</button>
+                                        <button class="btn btn-danger" type="button">Cancel</button>
+                                      </div>
+                                    </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="card-body">
+                          <div class="table-responsive">
+                              <table class="table table-bordered">
+                                  <thead>
+                                      <tr>
+                                          <th>Staff</th>
+                                          <th>Full Name</th>
+                                          <th>Username</th>
+                                          <th>Role</th>
+                                          <th>Email</th>
+                                          <th>Created</th>
+                                          <th></th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <tr *ngFor="let adm of adminstrators">
+                                          <td class="table-img">
+                                              <img *ngIf="adm.photo" src="{{adm.photo}}" alt="user-name" class="mr-3 rounded-circle border">
+                                              <img *ngIf="!adm.photo" src="/assets/images/picture.png" alt="user-name" class="mr-3 rounded-circle border">
+                                          </td>
+                                          <td>
+                                              <a routerLink="/admin-manager/edit/{{adm.id}}">
+                                                {{adm.full_name}}
+                                              </a>
+                                          </td>
+                                          <td>{{adm.username}}</td>
+                                          <td>{{adm.role}}</td>
+                                          <td>{{adm.email}}</td>
+                                          <td>{{adm.created_at | date}}</td>
+                                          <td class="text-center">
+                                              <span *ngIf="adm.id !== 1">
+                                                  <a routerLink="/staff-manager/edit/{{adm.id}}" class="btn btn-success admin-btn-sm btn-sm mr-3"><i class="fa fa-edit"></i> </a>
+                                                  <button type="button" (click)="delete(adm)" class="btn btn-danger admin-btn-sm btn-sm"><i class="fa fa-trash"></i> </button>
+                                              </span>
+                                          </td>
+
+                                          <!-- <td *ngIf="adm.id.toLowerCase() === 'administrator'" class="text-center">
+                                              <a class="btn btn-success admin-btn-sm btn-sm mr-3 disabled"><i class="fa fa-edit"></i> </a>
+                                              <button type="button" class="btn btn-danger admin-btn-sm btn-sm disabled"><i class="fa fa-trash"></i> </button>
+                                          </td> -->
+                                      </tr>
+                                  </tbody>
+                              </table>
+                          </div>
+
+                          <div class="pagin-wrapper mt-3">
+                              <ul class="pagination pagination-sm justify-content-end">
+                                  <li class="page-item">
+                                      <a class="btn page-link disabled" href="">Previous</a>
+                                  </li>
+                                  <li class="page-item">
+                                      <a class="btn page-link disabled" href="">1</a>
+                                  </li>
+                                  <li class="page-item">
+                                      <a class="btn page-link disabled" href="">Next</a>
+                                  </li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        </section>
+
+
+
+
+    </div>
+  </div>
+</div>
+<app-admin-footer></app-admin-footer>

@@ -1,0 +1,71 @@
+@import '../../../../themes/colors.scss';
+footer {
+    color: #fff;
+    background: $primary;
+    font-size: 14px;
+}
+
+.topGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    row-gap: 20px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+
+.linkTitle {
+    font-size: 16px;
+    margin-bottom: 27px;
+    color: #e5e5e5;
+    opacity: 0.9;
+}
+
+.linkBody {
+    display: grid;
+    grid-template-columns: auto;
+    gap: 10px;
+    a {
+        color: #e5e5e5;
+        opacity: 0.7;
+    }
+    a:hover {
+        opacity: 1;
+        text-decoration: none;
+    }
+}
+
+.social {
+    .linkBody {
+        grid-template-columns: repeat(auto-fill, minmax(30px, 30px));
+        gap: 10px;
+        svg {
+            width: 30px;
+            height: 30px;
+        }
+    }
+}
+
+.bottom {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-top: 1px solid #e5e5e5;
+    background-color: $primary;
+}
+
+.copyrightTxt {
+    opacity: 0.7;
+}
+
+.dropDownCont {
+    position: relative;
+    border: 1px solid #e5e5e5;
+    border-radius: 3px;
+    padding: 9px 11px;
+    min-width: 69px;
+    .clickable {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        cursor: pointer;
+    }
+}

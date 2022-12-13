@@ -1,0 +1,646 @@
+a:hover{
+  text-decoration: none;
+}
+
+#menu-wrapper ::-webkit-scrollbar  {
+    width: 6px !important;
+    background: $secondary !important;
+}
+
+#menu-wrapper ::-webkit-scrollbar-thumb  {
+    background: #aaa !important;
+}
+.adminMain-wrapper ::-webkit-scrollbar  {
+    width: 6px !important;
+    background: $secondary !important;
+}
+
+.adminMain-wrapper ::-webkit-scrollbar-thumb  {
+    background: $secondary !important;
+}
+
+
+.linkList {
+    height: 100%;
+    width: 260px;
+    position: fixed;
+    z-index: 3000;
+    top: 70px;
+    left: 0;
+    background-color: $secondary;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    transition: 0.5s;
+    padding-top: 10px;
+    border-right: 1px solid $secondary;
+  }
+
+
+.linkList a:hover {
+    color: #f1f1f1;
+}
+.mobileToggle{
+    display: none;
+}
+#minimizeNavMob{
+    display: none;
+}
+@media only screen and (max-width: 776px) {
+    .linkList{
+        width: 0px;
+    }
+    .mobileToggle{
+        display: inline-block;
+    }
+    .destopToggle{
+        display: none !important;
+    }
+    .container-fluid{
+        padding-right: 5px !important;
+        padding-left: 5px !important;
+    }
+}
+
+
+.sideBarTop{
+  width: 260px;
+  position: fixed;
+  background: $secondary;
+  padding: 15px 40px 15px 10px;
+  // font-size: 30px;
+  // line-height: 30px;
+  z-index: 1000;
+  top: 0px;
+  left: 0;
+  border-bottom: 1px solid $secondary;
+  height: 70px;
+}
+
+.nav-action-icon{
+    color: #f2f2f2;
+    font-size: 17px;
+    cursor: pointer;
+    margin-top: 8px;
+}
+#main {
+    transition: margin-left .5s;
+    margin-left: 260px;
+    background: #f9f9f9;
+    padding-bottom: 80px;
+}
+
+#maximizeNav{
+    display: none;
+}
+#mobileMinimizeNav{
+    display: none;
+}
+.mobileHeader{
+    display: none;
+}
+@media only screen and (max-width: 776px){
+    #main {
+        margin-left: 0px !important;
+    }
+    .adminMain-wrapper{
+        margin-top: 60px;
+        padding-left: 8px;
+        padding-right: 8px;
+    }
+}
+
+.list-group-item{
+	background-color: $secondary;
+	border-radius: 0px !important;
+  padding: 16px 15px 16px 15px !important;
+  color: #f2f2f2;
+  cursor: pointer;
+  font-size: 14px;
+  border: none;
+}
+.list-group-item:hover{
+    color: #fff;
+    background: $secondary;
+}
+.list-group-item.active{
+    background-color: $secondary;
+    border: none;
+    color: #000 !important;
+}
+
+.onFocus{
+    background-color: $primary !important;
+    border-left: 3px solid $secondary !important;
+}
+.dropdownMenu{
+    border-left: 3px solid $primary;
+}
+.dropdownMenu .list-group-item:hover{
+	color: #fff !important;
+}
+.dropdownMenu a{
+    color: rgb(169, 183, 208);
+    margin-right: 15px;
+    background-color: #05162e;
+}
+.menu-list-icon{
+    width: 25px;
+    text-align: left;
+    color: $primary;
+}
+
+.logout {
+	cursor: pointer;
+}
+.isActive{
+	background: #f9f9f9 !important;
+	color: #000 !important;
+}
+.nav-title h4{
+    color: #fff;
+    font-size: 10px;
+    text-transform: uppercase;
+    margin: 30px 15px 30px 20px;
+}
+
+// END SIDE NAV
+.adminMain-wrapper{
+    background: #fff;
+    min-height: 100vh
+}
+.all-wrapper{
+    font-family: calibri;
+}
+
+section{
+    padding-top: 0px !important;
+}
+
+
+
+// BREADCRUM
+.user-breadcrum{
+    margin: 10px 0px 20px 0px;
+}
+.user-breadcrum li a{
+    color: #fff;
+    text-transform: capitalize;
+}
+.user-breadcrum li{
+    color: #fff;
+    text-transform: capitalize;
+}
+.user-breadcrum h4{
+    text-transform: uppercase !important;
+    font-size: 20px;
+    color: #fff;
+}
+.alert{
+  margin: 0px;
+  padding: 0px;
+}
+.alert-danger{
+  color: red;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+}
+
+
+// BUTTONS
+.btn-primary{
+    background: #010d19 !important;
+    border-color: #010d19 !important;
+}
+// BUTTONS
+.btn-success{
+    background: $primary !important;
+    border-color: $primary;
+}
+
+/***************************************/
+// FORM STYLE
+/***************************************/
+// input.form-control, select.form-control{
+//     height: 45px;
+//     border-radius: 0px;
+// }
+.form-control:focus{
+    box-shadow: none;
+    border-color: #000;
+}
+.bank-info .form-control{
+    background: $primary;
+}
+
+
+
+
+.mobile-nav-icon{
+    font-size: 30px;
+    color: #fff;
+    margin-right: 20px;
+    font-weight: lighter;
+    // padding-top: 15px;
+}
+@media only screen and (max-width: 576px){
+    .mobile-nav-icon{
+        padding-top: 0px !important;
+        margin-top: -150px;
+        font-size: 25px;
+    }
+    ul.navbar-nav {
+        padding: 0px 0 0px !important;
+    }
+}
+#showNav{
+    display: none;
+}
+.navbar-dark{
+    background: $secondary !important;
+    border-radius: 0px;
+    height: 60px;
+}
+
+.admin-header {
+  width: 100%;
+  position: fixed;
+  background: $secondary;
+  padding: 5px 10px 5px 50px;
+  font-size: 30px;
+  line-height: 30px;
+  z-index: 1000;
+  top: 0px;
+  border-bottom: 1px solid $secondary;
+  height: 70px;
+}
+
+.admin-header .title {
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.admin-header span.pull-right {
+  margin-right: 20px;
+}
+
+
+
+.adminMain-wrapper{
+  .page-title-box{
+    margin-top: 70px;
+    background: #e9ecef;
+    h4{
+      font-size: 19px;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding: 12px;
+    }
+  }
+    .card-dark{
+        // position: relative;
+        // display: flex;
+        // flex-direction: column;
+        min-width: 0;
+        word-wrap: break-word;
+        // background-color: $secondary;
+        background-clip: border-box;
+        border: 1px solid #ccc;
+        // border-radius: 0.625rem;
+        box-shadow: none;
+
+        .card-header {
+            // display: flex;
+            justify-content: space-between;
+            align-items: stretch;
+            flex-wrap: wrap;
+            // min-height: 70px;
+            padding: 15px 20px;
+            background: $secondary !important;
+            border-bottom: 1px solid #2B2B40;
+            h3{
+                line-height: 20px;
+                margin-top: 20px;
+                .title{
+                    color: #fff;
+                    display: block;
+                    font-size: 20px;
+                }
+                .subtitle{
+                    font-size: 13px;
+                }
+            }
+        }
+
+        .card-body{
+            .dark-btn{
+                background: $secondary;
+                font-size: 18px;
+                width: 35px;
+                height: 35px;
+            }
+            .dark-btn-danger{
+                background: red;
+                font-size: 15px;
+                width: 32px;
+                height: 32px;
+            }
+            td .subt{
+                font-size: 13px;
+            }
+            .userPhoto img{
+                width: 45px;
+                height: 45px;
+                border-radius: 5px;
+            }
+        }
+    }
+
+    .dashboard{
+      .eachGrid{
+        .card-body{
+          background-color: $secondary;
+          background-clip: border-box;
+          border: 1px solid #2B2B40;
+          border-radius: 0.625rem;
+          box-shadow: none;
+          color: #fff;
+          .no_user{
+              margin-top: 10px;
+          }
+        }
+      }
+    }
+
+    input, textarea, select{
+      background: #f9f9f9 !important;
+      color: #000 !important;
+      padding: 10px !important;
+      font-size: 15px;
+      border-radius: 5px;
+      margin-bottom: 30px;
+    }
+    input, select{
+       height: 45px;
+    }
+    input:focus{
+        outline: none;
+        border-color: #ccc;
+    }
+    label{
+        font-size: 15px;
+        color: #555 !important;
+    }
+
+    .dottedTable table tr th{
+        border-top: 1px dashed $secondary !important;
+        border-bottom: 1px dashed $secondary !important;
+        color: #fff;
+        font-size: 14px;
+        font-weight: lighter;
+    }
+
+    .dottedTable table tr td{
+        padding-top: 20px !important;
+        padding-bottom: 5px !important;
+        color: #ccc;
+        font-size: 14px;
+        border-top: 1px dashed $secondary !important;
+        border-bottom: 1px dashed $secondary !important;
+    }
+    .dottedTable table tr td .badge{
+        font-weight: lighter;
+    }
+}
+
+
+
+.adminUpload {
+    .uploadWrapper {
+        width: 100%;
+        border: 2px dashed #ccc;
+        height: 200px;
+        // cursor: pointer;
+        .uploadLabel {
+            width: 100%;
+            height: 200px;
+            cursor: pointer;
+        }
+        .uploadIcon {
+            font-size: 40px;
+            text-align: center !important;
+            color: #ccc;
+            margin-top: 65px;
+        }
+        p {
+            color: #ccc;
+            font-size: 13px;
+        }
+        .deleteImg {
+            position: absolute;
+            right: 10px;
+            top: 7px;
+            width: 25px;
+            height: 25px;
+            background: red;
+            border-radius: 4px;
+            z-index: 1;
+            cursor: pointer;
+            i {
+                color: #fff;
+                margin-top: 4px;
+            }
+        }
+        .uploadProgress {
+            position: absolute;
+            top: 80px;
+            width: 100%;
+        }
+        .uploaded {
+            position: absolute;
+            top: 7px;
+            left: 15px;
+            object-fit: contain;
+            width: 90%;
+            height: 90%;
+        }
+    }
+}
+
+
+.adminNoteWrap {
+  display: table;
+  float: right;
+  min-height: 180px;
+  width: 300px;
+  background-color: #fff;
+  padding: 20px 10px;
+  position: fixed;
+  top: 150px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  -webkit-animation-name: noticeSlide;
+  /* Safari 4.0 - 8.0 */
+  -webkit-animation-duration: 0.5s;
+  /* Safari 4.0 - 8.0 */
+  -webkit-animation-delay: 0.5s;
+  /* Safari 4.0 - 8.0 */
+  animation-name: noticeSlide;
+  animation-duration: 0.5s;
+  animation-delay: -0.1s;
+  z-index: 50000;
+  font-family: calibri;
+  font-size: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  p {
+      color: #000;
+      text-align: center;
+      .pointer {
+          cursor: pointer;
+      }
+  }
+  .delIcon{
+    border: 3px solid #000;
+    padding: 10px 13px;
+    border-radius: 50%;
+    font-size: 30px;
+    background: red;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+
+  .checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: #7ac142;
+    fill: none;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards
+  }
+
+  .checkmark {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      display: block;
+      stroke-width: 2;
+      stroke: #fff;
+      stroke-miterlimit: 10;
+      margin: auto;
+      box-shadow: inset 0px 0px 0px #7ac142;
+      animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both
+  }
+
+  .checkmark__check {
+      transform-origin: 50% 50%;
+      stroke-dasharray: 48;
+      stroke-dashoffset: 48;
+      animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards
+  }
+}
+
+@-webkit-keyframes noticeSlide {
+  0% {
+      top: 0px;
+  }
+  20% {
+      top: 30px;
+  }
+  40% {
+      top: 60px;
+  }
+  60% {
+      top: 90px;
+  }
+  80% {
+      top: 120px;
+  }
+  100% {
+      top: 150px;
+  }
+}
+
+
+/* Standard syntax */
+
+@keyframes noticeSlide {
+  0% {
+    top: 0px;
+  }
+  20% {
+      top: 30px;
+  }
+  40% {
+      top: 60px;
+  }
+  60% {
+      top: 90px;
+  }
+  80% {
+      top: 120px;
+  }
+  100% {
+      top: 150px;
+  }
+}
+
+@keyframes stroke {
+  100% {
+      stroke-dashoffset: 0
+  }
+}
+
+@keyframes scale {
+  0%,
+  100% {
+      transform: none
+  }
+  50% {
+      transform: scale3d(1.1, 1.1, 1)
+  }
+}
+
+@keyframes fill {
+  100% {
+      box-shadow: inset 0px 0px 0px 30px #7ac142
+  }
+}
+
+
+input,
+textarea,
+select {
+  background: #fff !important;
+  color: #000 !important;
+  padding: 10px !important;
+}
+
+.pagination {
+  .page-link{
+    color: #000 !important;
+  }
+  .active{
+    border: none !important;
+    padding: 0rem !important;
+    a{
+      color: #fff !important;
+      background: $primary;
+    }
+    .btn.disabled, .btn:disabled{
+      opacity: 1;
+      border-color: $primary;
+    }
+  }
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #000;
+  border-color: #000;
+}
+
+

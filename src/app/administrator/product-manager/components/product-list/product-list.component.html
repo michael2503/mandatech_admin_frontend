@@ -1,0 +1,145 @@
+<input type="checkbox" id="drawer-toggle" name="drawer-toggle" />
+<label for="drawer-toggle" id="drawer-toggle-label"></label>
+<header class="admin-header">
+    <app-admin-header></app-admin-header>
+</header>
+
+<nav id="drawer">
+    <app-admin-nav-content [mainpage]="'productmanager'" page="products"></app-admin-nav-content>
+</nav>
+
+<div id="main" class="adminMain-wrapper">
+  <div class="content">
+    <div class="container-fluid">
+
+
+
+      <div class="page-title-box">
+        <div class="d-flex justify-content-between">
+          <h4 class="page-title">Products</h4>
+
+          <div class="page-title-right">
+            <ol class="breadcrumb m-0">
+                <li class="breadcrumb-item">
+                    <a routerLink="/">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item active">Products</li>
+            </ol>
+          </div>
+        </div>
+
+      </div>
+
+
+      <section class="web-set">
+
+        <div class="card card-body mb-5 mt-4">
+          <div class="row d-flex justify-content-between">
+            <div class="col-xl-3 col-lg-3 pt-1 pb-1 sort">
+              <form [formGroup]="form">
+                <input type="text" placeholder="Sort By:" class="form-control mb-0" readonly (click)="openSortDropdown()" formControlName="theSort">
+              </form>
+              <div class="card card-body p-0 sortWrapper" *ngIf="SortDropdown">
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item list-group-item-action" (click)="selectSort('Lowest Price', 'LP')">Lowest Price</li>
+                  <li class="list-group-item list-group-item-action" (click)="selectSort('Higher Price', 'HP')">Higher Price</li>
+                  <li class="list-group-item list-group-item-action" (click)="selectSort('Recently Added', 'RA')">Recently Added</li>
+                  <li class="list-group-item list-group-item-action" (click)="selectSort('Oldest Arrival', 'OA')">Oldest Arrival</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-xl-7 col-lg-6 pt-1 pb-1 search">
+              <form class="search-form" [formGroup]="formSearch" (ngSubmit)="submit()">
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search by name, category" formControlName="keywords">
+                  <div class="input-group-append">
+                    <button *ngIf="!isSearching" class="btn btn-success" type="submit">Go</button>
+                    <button *ngIf="isSearching" class="btn btn-success" type="submit"><i class="fa fa-spinner fa-spin"></i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="col-xl-2 col-lg-3 pt-1 pb-1 addMore">
+              <a routerLink="/products/add" class="btn btn-primary btn-block" style="height: 43px; padding-top: 8px;">Add New</a>
+            </div>
+          </div>
+        </div>
+
+        <div *ngIf="products.length > 0">
+          <div class="row">
+
+            <div *ngFor="let product of products" class="col-xl-3 col-lg-4 col-md-6 col-sm-6 mb-4">
+                <div class="product-grid">
+                    <div class="product-image">
+                        <a href="#" class="image">
+                            <img src="{{ product?.feature_img }}">
+                        </a>
+                        <ul class="product-links">
+                          <li><a routerLink="/products/edit/{{ product?.id }}"><i class="fa fa-pencil"></i></a></li>
+                          <li><a routerLink="/product/{{ product?.id }}/{{ product?.name_slug }}"><i class="fa fa-eye"></i></a></li>
+                          <li class="pointer"><a (click)="deleteProduct('warning', product?.id)"><i class="fa fa-trash"></i></a></li>
+                        </ul>
+                    </div>
+                    <div class="product-content">
+                        <div class="justify-content-between" style="display: flex;">
+                          <span class="product-category"><a href="">{{ product?.category | urlToString }}</a></span>
+                        </div>
+                        <h3 class="title"><a href="#">{{ product?.name }}</a></h3>
+                        <div class="price">₦{{ product?.sales_price | number }}</div>
+                        <a class="add-to-cart">{{ product?.quantity - product?.sold }}</a>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+
+
+          <div class="text-center">
+            <ul *ngIf="productCounts" class="pagination pagination-sm justify-content-center mt-5">
+              <li *ngFor="let pageLink of paginationLink" class="page-item {{pageLink.linkStatus}}">
+                  <a routerLink="{{pageUrl}}/{{pageLink.num}}" class="page-link">{{
+                      pageLink.text }}</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div *ngIf="products.length < 1">
+          <p class="text-center">No products found</p>
+        </div>
+
+      </section>
+
+    </div>
+  </div>
+</div>
+
+
+<app-admin-footer></app-admin-footer>
+
+
+
+<div *ngIf="showNotice">
+  <div class="adminNoteWrap">
+    <div *ngIf="justMssg">
+      <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+        <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+        <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+      </svg>
+
+      <p class="pt-3"> {{theMessage}} </p>
+      <div class="d-flex justify-content-center"><button class="btn btn-sm btn-primary" (click)="closeMyNotice()">Close</button></div>
+    </div>
+
+    <div *ngIf="deleteModal">
+      <div class="d-flex justify-content-center"><i class="fa fa-times delIcon"></i></div>
+      <p class="text-center">{{theMessage}}</p>
+      <div class="text-center mt-4 mb-2">
+          <button class="btn btn-success btn-sm mr-5" (click)="deleteProduct('', returnID)">YES</button>
+          <button class="btn btn-primary btn-sm" (click)="closeMyNotice()">NO</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,160 @@
+<!-- <app-inner-loading *ngIf="isLoading" [justSpinner]="true" [marginTo]="false"></app-inner-loading> -->
+
+<div class="superParent">
+    <div *ngIf="!stopTimer" class="countDown">
+        <div class="days">
+            <div class="big">
+                <div id="dl">
+                    <span>0</span>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                    <span>6</span>
+                    <span>7</span>
+                    <span>8</span>
+                    <span>9</span>
+                </div>
+                <div id="dr">
+                    <span>0</span>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                    <span>6</span>
+                    <span>7</span>
+                    <span>8</span>
+                    <span>9</span>
+                </div>
+            </div>
+            <span class="small">{{days > 1 ? 'days' : 'day'}}</span>
+        </div>
+        <div class="divider">:</div>
+        <div class="hours">
+            <div class="big">
+                <div id="hl">
+                    <span>0</span>
+                    <span>1</span>
+                    <span>2</span>
+                </div>
+                <div id="hr">
+                    <span>0</span>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                    <span>6</span>
+                    <span>7</span>
+                    <span>8</span>
+                    <span>9</span>
+                </div>
+            </div>
+            <span class="small">{{hours > 1 ? 'hours' : 'hour'}}</span>
+        </div>
+        <div class="divider">:</div>
+        <div class="minutes">
+            <div [style.color]="stopTimer ? 'red' : '#000'" class="big">
+                <div id="ml">
+                    <span>0</span>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                </div>
+                <div id="mr">
+                    <span>0</span>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                    <span>6</span>
+                    <span>7</span>
+                    <span>8</span>
+                    <span>9</span>
+                </div>
+            </div>
+            <span [style.color]="stopTimer ? 'red' : '#000'" class="small">{{minutes > 1 ? 'minutes' : 'minute'}}</span>
+        </div>
+        <div class="divider">:</div>
+        <div class="seconds">
+            <div [style.color]="stopTimer ? 'red' : '#000'" class="big">
+                <div id="sl">
+                    <span>0</span>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                </div>
+                <div id="sr">
+                    <span>0</span>
+                    <span>1</span>
+                    <span>2</span>
+                    <span>3</span>
+                    <span>4</span>
+                    <span>5</span>
+                    <span>6</span>
+                    <span>7</span>
+                    <span>8</span>
+                    <span>9</span>
+                </div>
+            </div>
+            <span [style.color]="stopTimer ? 'red' : '#000'" class="small">{{seconds > 1 ? 'seconds' : 'second'}}</span>
+        </div>
+    </div>
+
+    <div *ngIf="stopTimer" class="countDown late">
+        <div class="days">
+            <div class="big">
+                <div id="dl">
+                    <span>#</span>
+                </div>
+                <div id="dr">
+                    <span>#</span>
+                </div>
+            </div>
+            <span class="small">{{days > 1 ? 'days' : 'day'}}</span>
+        </div>
+        <div class="divider">:</div>
+        <div class="hours">
+            <div class="big">
+                <div id="hl">
+                    <span>L</span>
+                </div>
+                <div id="hr">
+                    <span>A</span>
+                </div>
+            </div>
+            <span class="small">{{hours > 1 ? 'hours' : 'hour'}}</span>
+        </div>
+        <div class="divider">:</div>
+        <div class="minutes">
+            <div class="big">
+                <div id="ml">
+                    <span>T</span>
+                </div>
+                <div id="mr">
+                    <span>E</span>
+                </div>
+            </div>
+            <span class="small">{{minutes > 1 ? 'minutes' : 'minute'}}</span>
+        </div>
+        <div class="divider">:</div>
+        <div class="seconds">
+            <div class="big">
+                <div id="sl">
+                    <span>#</span>
+                </div>
+                <div id="sr">
+                    <span>#</span>
+                </div>
+            </div>
+            <span class="small">{{seconds > 1 ? 'seconds' : 'second'}}</span>
+        </div>
+    </div>
+</div>

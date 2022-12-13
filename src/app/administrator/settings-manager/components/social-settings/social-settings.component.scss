@@ -1,0 +1,26 @@
+.input-title{
+    width: 15%;
+    margin-top: 25px;
+}
+.form-input{
+    width: 85%;
+    margin-top: 20px;
+}
+.form-input input{
+    height: 30px;
+    font-size: 14px;
+}
+.each-link{
+    margin-bottom: 20px;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #ccc;
+}
+.url-title{
+    text-transform: uppercase;
+}
+
+input, textarea, select{
+    background: #fff !important;
+    color: #000 !important;
+    padding: 10px !important;
+}

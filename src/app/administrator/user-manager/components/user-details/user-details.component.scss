@@ -1,0 +1,130 @@
+@import '../../../../../themes/colors.scss';
+
+.user-list table tr td{
+  padding: 15px 12px 5px 12px;
+  font-size: 14px;
+}
+.user-list table tr td.table-img{
+  padding: 5px 12px !important;
+  img{
+    height: 40px;
+    width: 40px;
+  }
+}
+
+input, textarea, select{
+  background: #fff !important;
+  color: #000 !important;
+  padding: 10px !important;
+}
+thead{
+  border-top: 1px solid #ccc;
+}
+.searchInput{
+  height: 40px;
+  border-radius: 0px;
+}
+
+
+//start
+
+.activeTab {
+  background: $primary;
+  border-radius: 5px;
+  a{
+    color: #fff !important;
+  }
+}
+
+.tabLink {
+  padding: 12px 0px;
+  font-weight: 550;
+  font-size: 15px;
+  a{
+    color: #555;
+    padding: 12px 20px 13px !important;
+  }
+}
+.sortWrap{
+  border: 1px solid #ccc;
+  background: #fff;
+  margin-top: 30px;
+  padding: 5px 5px;
+  border-radius: 10px;
+}
+@media only screen and (max-width: 520px){
+  .mobileView{
+    display: block !important;
+  }
+}
+
+.eachOrder{
+  // border-bottom: 1px solid #ccc;
+  padding-bottom: 10px;
+  // padding-top: 20px;
+  .proImg{
+      border: 2px solid #ccc;
+      padding: 2px;
+      border-radius: 5px;
+      img{
+          object-fit: contain;
+          width: 100%;
+          height: 113px;
+      }
+  }
+  .proInfoWrapepr{
+      padding-left: 0px;
+      .proInfo{
+          .pInfo{
+              margin-bottom: 2px;
+              font-size: 14px;
+              font-weight: 550;
+          }
+      }
+      @media only screen and (max-width: 575px){
+          padding-left: 15px;
+          padding-top: 10px;
+      }
+  }
+
+}
+
+@media only screen and (max-width: 450px){
+  .mobileView{
+      display: block !important;
+  }
+}
+
+.selectNum{
+  height: 30px;
+  padding: 2px !important;
+  margin-bottom: 0px;
+}
+
+.dropDownWrapper{
+  position: relative;
+  width: 100%;
+  .subWrap{
+    background: #fff;
+    border: 1px solid #ccc;
+    min-height: 180px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    .eachUser p{
+      padding: 15px 15px;
+      border-bottom: 1px solid #ccc;
+      cursor: pointer;
+    }
+  }
+}
+.admin-btn-sm{
+  font-size: 11px;
+}
+.infoList{
+  font-size: 14px;
+}
+.pointer{
+  cursor: pointer;
+}

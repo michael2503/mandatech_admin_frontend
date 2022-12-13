@@ -1,0 +1,132 @@
+<div class="card">
+  <div class="card-header">
+    Addresses
+  </div>
+
+
+  <div class="card-body">
+
+    <div *ngFor="let address of userAddresses">
+
+      <div class="main-timeline">
+        <div class="timeline">
+            <div class="timeline-content">
+                <div class="timeline-icon"><i class="fa fa-map-marker"></i></div>
+                <h3 class="title">{{ address?.phone }}</h3>
+                <p class="description">
+                    {{ address?.address }}, {{ address?.city }}, {{ address?.state }}, {{ address?.country }}
+                </p>
+                <div class="mt-3">
+                    <button [openModal]="editModal" (click)="getEach(address?.id)" class="btn btn-secondary btn-sm mr-3"><i class="fa fa-pencil"></i></button>
+                    <button (click)="deleteAddress('warning', address?.id)" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
+                </div>
+            </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+
+<!-- [openModal]="editModal" (click)="getEach(bank?.id)" -->
+
+
+
+<div id="modals">
+
+  <app-modal #editModal [closeModal]="closeModal">
+      <div class="modalContent" style="background: #fff !important;">
+          <div class="modalHead">
+            <div class="d-flex justify-content-between">
+              <div>
+                <h5 class="text-dark">Edit Address</h5>
+              </div>
+
+              <div>
+                <span class="closeBtn">
+                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                          d="M12.026 0L7 5.026L1.974 0L0 1.974L5.026 7L0 12.026L1.974 14L7 8.974L12.026 14L14 12.026L8.974 7L14 1.974L12.026 0Z"
+                          fill="#fff" />
+                  </svg>
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="modalBody" style="overflow-y: auto; height: 500px;">
+            <div class="formBody">
+              <form [formGroup]="form" (ngSubmit)="submit()">
+
+                <div class="form-group">
+                  <label>Address</label>
+                  <input type="text" class="form-control" formControlName="address">
+                </div>
+
+                <div class="row">
+                  <div class="col-xl-6">
+                    <div class="form-group">
+                      <label>City</label>
+                      <input type="text" class="form-control" formControlName="city">
+                    </div>
+                  </div>
+
+                  <div class="col-xl-6">
+                    <div class="form-group">
+                      <label>State</label>
+                      <input type="text" class="form-control" formControlName="state">
+                    </div>
+                  </div>
+                </div>
+
+
+
+                <div class="form-group">
+                  <label>Country</label>
+                  <input type="text" class="form-control" formControlName="country">
+                </div>
+
+                <div class="form-group">
+                  <label>Phone</label>
+                  <input type="text" class="form-control" formControlName="phone">
+                </div>
+
+                <div class="text-center mt-4">
+                  <button class="btn btn-primary" *ngIf="!isSubmitting" type="submit">Update</button>
+                  <button class="btn btn-primary disabled" *ngIf="isSubmitting" disabled><i class="fa fa-spinner fa-spin"></i> Updating</button>
+                </div>
+              </form>
+            </div>
+          </div>
+      </div>
+  </app-modal>
+
+</div>
+
+
+
+
+<div *ngIf="showNotice">
+  <div class="adminNoteWrap">
+      <div *ngIf="justMssg">
+        <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+          <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none" />
+          <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8" />
+        </svg>
+
+        <p class="pt-3"> {{theMessage}} </p>
+        <div class="d-flex justify-content-center"><button class="btn btn-sm btn-primary" (click)="closeMyNotice()">Close</button></div>
+      </div>
+
+      <div *ngIf="deleteModal">
+          <div class="d-flex justify-content-center"><i class="fa fa-times delIcon"></i></div>
+          <p class="text-center">{{theMessage}}</p>
+          <div class="text-center mt-4 mb-2">
+              <button class="btn btn-success btn-sm mr-5" (click)="deleteAddress('', returnID)">YES</button>
+              <button class="btn btn-primary btn-sm" (click)="closeMyNotice()">NO</button>
+          </div>
+      </div>
+  </div>
+</div>
